@@ -1,3 +1,20 @@
 <resources>
-    <string name="app_name">ExtremeMovie</string>
+    <string name="app_name">Extreme Movie</string>
+
+    <!-- Main activity -->
+    <string name="main_movie_navigation_title">MOVIES</string>
+    <string name="main_television_navigation_title">TV</string>
+    <string name="main_profile_navigation_title">PROFILE</string>
+
+    <!-- Walk through first step -->
+    <string name="walk_through_first_step_desc">Get the first\nMovie &amp;TV information</string>
+    <string name="walk_through_first_step_next_action">Next</string>
+
+    <!-- Walk through second step -->
+    <string name="walk_through_second_step_desc">Know the movie\nis not worth Watching</string>
+    <string name="walk_through_second_step_next_action">Next</string>
+
+    <!-- Walk through second third step -->
+    <string name="walk_through_third_step_desc">Real-time\nupdates movie Trailer</string>
+    <string name="walk_through_third_step_next_action">Next</string>
 </resources>

@@ -1,4 +1,2 @@
-include (":mobile")
+include(":model", ":shared", ":mobile")
 rootProject.name = "ExtremeMovie"
-include(":model")
-include(":shared")

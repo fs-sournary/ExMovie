@@ -33,11 +33,27 @@ allprojects {
 
 subprojects {
     apply(plugin = "com.diffplug.gradle.spotless")
+    val ktlintVersion = "0.36.0"
     spotless {
         kotlin {
             target("**/*.kt")
-            ktlint("0.40.0").userData(mapOf("max_line_length" to "100", "disabled_rules" to "import-ordering"))
+            ktlint(ktlintVersion).userData(
+                mapOf("max_line_length" to "100", "disabled_rules" to "import-ordering")
+            )
             licenseHeaderFile(project.rootProject.file("copyright.kt"))
+        }
+        kotlinGradle {
+            target("**/*.gradle.kts")
+            ktlint(ktlintVersion)
+            licenseHeaderFile(
+                project.rootProject.file("copyright.kt"),
+                "(plugins |import |include)"
+            )
+        }
+    }
+    tasks.whenTaskAdded {
+        if (name == "preBuild") {
+            mustRunAfter("spotlessCheck")
         }
     }
     tasks.withType<KotlinCompile>().configureEach {

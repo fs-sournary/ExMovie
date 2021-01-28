@@ -19,14 +19,14 @@ android {
         testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
     }
     buildTypes {
-        getByName("release") {
+        release {
             minifyEnabled(true)
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
-        getByName("debug") {
+        debug {
             versionNameSuffix("-debug")
         }
     }
@@ -48,6 +48,7 @@ android {
 
 dependencies {
 
+    implementation(project(":shared"))
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     // Kotlin
