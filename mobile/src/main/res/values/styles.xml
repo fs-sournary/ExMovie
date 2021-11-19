@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.ExtremeMovie.Button.WalkThrough.Normal" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:paddingStart">56dp</item>
+        <item name="android:paddingEnd">56dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">32dp</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="rippleColor">?attr/colorControlHighlight</item>
+        <item name="strokeColor">@android:color/white</item>
+    </style>
+
+    <style name="Widget.ExtremeMovie.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="insetForeground">@android:color/transparent</item>
+        <item name="background">@android:color/transparent</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.ExtremeMovie.ImageView.GenreMovie" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="Widget.ExtremeMovie.DateStickerDecoration" parent="">
+        <item name="android:width">64dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="dateTextSize">24sp</item>
+        <item name="dayTextSize">12sp</item>
+    </style>
+
+    <style name="Widget.ExtremeMovie.BottomSheet.Modal" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="shapeAppearance">
+            @style/ShapeAppearance.ExtremeMovie.LargeComponent.BottomSheet.Model
+        </item>
+    </style>
+
+    <style name="Widget.ExtremeMovie.Button.MovieDetail" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="minWidth">48dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">0dp</item>
+        <item name="iconTint">?attr/colorControlNormal</item>
+        <item name="rippleColor">?attr/colorControlHighlight</item>
+    </style>
+</resources>

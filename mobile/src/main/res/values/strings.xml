@@ -1,0 +1,79 @@
+<resources>
+    <!-- Common -->
+    <string name="app_name">Extreme Movie</string>
+    <string name="no_connectivity_error_message">You\'re offline</string>
+    <string name="no_connection">No connection</string>
+    <string name="retry">Retry</string>
+
+    <!-- Main activity -->
+    <string name="main_movie_navigation_title">Movie</string>
+    <string name="main_television_navigation_title">Television</string>
+    <string name="main_library_navigation_title">Library</string>
+    <string name="main_profile_navigation_title">Profile</string>
+    <string name="main_search_menu_item_title">Search</string>
+
+    <!-- Walk through first step fragment -->
+    <string name="walk_through_first_step_desc">Get the first\nMovie &amp;TV information</string>
+    <string name="walk_through_first_step_next_action">Next</string>
+
+    <!-- Walk through second step fragment -->
+    <string name="walk_through_second_step_desc">Know the movie\nis not worth Watching</string>
+    <string name="walk_through_second_step_next_action">Next</string>
+
+    <!-- Walk through second third step fragment -->
+    <string name="walk_through_third_step_desc">Real-time\nupdates movie Trailer</string>
+    <string name="walk_through_third_step_next_action">Next</string>
+
+    <!-- Movie fragment -->
+    <string name="movie_title">MOVIES</string>
+    <string name="movie_item_first_intro_movie_title">Movie Trailer</string>
+    <string name="movie_item_first_intro_movie_version">V 1.0</string>
+    <string name="movie_item_first_intro_movie_description">Make your life better</string>
+    <string name="movie_more_action">View all</string>
+    <string name="movie_now_playing_category_title">Now playing</string>
+    <string name="movie_popular_category_title">Popular</string>
+    <string name="movie_top_rated_category_title">Top rated</string>
+    <string name="movie_up_coming_category_title">Up coming</string>
+    <string name="movie_now_playing_transition_name">now_playing_movie_transition_name</string>
+    <string name="movie_popular_transition_name">popular_movie_transition_name</string>
+    <string name="movie_top_rated_transition_name">top_rated_movie_transition_name</string>
+    <string name="movie_up_coming_transition_name">up_coming_movie_transition_name</string>
+    <string name="movie_go_to_setting">Go to setting</string>
+    <string name="movie_connectivity_message">Go to the setting, turn on your network to enjoy the newest movies</string>
+
+    <!-- Movie detail fragment -->
+    <string name="movie_detail_share_action">Share</string>
+    <string name="movie_detail_cast_action">Cast</string>
+    <string name="movie_detail_transition_name">movie_detail_transition_name</string>
+    <string name="movie_related_transition_name">related_movie_%1$s</string>
+    <string name="movie_detail_credit_title">Full cast &amp; crew</string>
+    <string name="movie_detail_similar_movie_title">Similar movie</string>
+    <string name="movie_detail_video_format">%s(%d)</string>
+    <string name="movie_detail_review_count">%1$s comments</string>
+
+    <!-- Search fragment -->
+    <string name="search_movie_hint">Search movie</string>
+    <string name="search_movie_transition_name">search_movie_transition_%s</string>
+    <string name="search_movie_retry_action">Retry</string>
+    <string name="search_movie_empty_search_movie">No result</string>
+    <string name="search_movie_saved_movie_time_format">yyyy-MM-dd</string>
+
+    <!-- Movie list fragment -->
+    <string name="movie_list_item_transition_name">movie_list_transition_%s</string>
+    <string name="movie_list_retry_action">Retry</string>
+    <string name="movie_list_transition_name">movie_list_transition_name</string>
+
+    <!-- Library movie fragment -->
+    <string name="library_movie_empty_search_movie">No movie in the library</string>
+    <string name="library_movie_item_transition_name">library_movie_item_transition_%s</string>
+
+    <!-- Television fragment -->
+    <string name="television_title">TELEVISION</string>
+    <string name="television_airing_today_title">Airing today</string>
+    <string name="television_on_the_air_title">On the air</string>
+    <string name="television_popular_title">Popular</string>
+    <string name="television_top_rated_title">Top rated</string>
+    <string name="television_more_action">More</string>
+    <string name="television_connectivity_message">Go to the setting, turn on your network to enjoy the newest movies</string>
+    <string name="television_go_to_setting_action">Go to setting</string>
+</resources>

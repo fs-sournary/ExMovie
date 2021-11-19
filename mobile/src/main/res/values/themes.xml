@@ -1,0 +1,44 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.ExtremeMovie" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- System bar color -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <!-- shape -->
+        <item name="shapeAppearanceSmallComponent">
+            @style/ShapeAppearance.ExtremeMovie.SmallComponent
+        </item>
+        <item name="shapeAppearanceMediumComponent">
+            @style/ShapeAppearance.ExtremeMovie.MediumComponent
+        </item>
+        <item name="shapeAppearanceLargeComponent">
+            @style/ShapeAppearance.ExtremeMovie.LargeComponent
+        </item>
+        <!-- style -->
+        <item name="bottomSheetStyle">@style/Widget.ExtremeMovie.BottomSheet.Modal</item>
+        <item name="android:lineSpacingMultiplier">1.3</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="buttonStyle">@style/Widget.MaterialComponents.Button.UnelevatedButton</item>
+        <!-- Android 12 splash screen theme -->
+        <item name="android:windowSplashScreenBackground" tools:targetApi="s">#004d28</item>
+    </style>
+
+    <style name="Theme.ExtremeMovie.Launcher">
+        <item name="android:windowBackground">@drawable/ll_launcher_background</item>
+    </style>
+
+    <style name="Theme.ExtremeMovie.WalkThrough" />
+
+    <style name="Theme.ExtremeMovie.Main">
+        <!-- Light status bar -->
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+    </style>
+</resources>

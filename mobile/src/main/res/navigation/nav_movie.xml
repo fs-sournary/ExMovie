@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_movie"
+    app:startDestination="@id/movie_dest">
+
+    <fragment
+        android:id="@+id/movie_dest"
+        android:name="com.itlifelang.extrememovie.mobile.ui.movie.MovieFragment"
+        tools:layout="@layout/fragment_movie">
+
+        <action
+            android:id="@+id/navigate_to_movie_detail"
+            app:destination="@id/movie_detail_dest" />
+
+        <action
+            android:id="@+id/navigate_to_search"
+            app:destination="@id/search_dest" />
+
+        <action
+            android:id="@+id/navigate_to_movie_list"
+            app:destination="@id/movie_list_dest" />
+
+        <argument
+            android:name="showBottomNavigation"
+            android:defaultValue="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/movie_detail_dest"
+        android:name="com.itlifelang.extrememovie.mobile.ui.moviedetail.MovieDetailFragment"
+        tools:layout="@layout/fragment_movie_detail">
+
+        <argument
+            android:name="movie"
+            app:argType="com.itlifelang.extrememovie.mobile.data.Movie"
+            app:nullable="false" />
+
+        <action
+            android:id="@+id/navigate_to_movie_detail"
+            app:destination="@id/movie_detail_dest"
+            app:popUpTo="@id/movie_detail_dest"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/navigate_to_cast"
+            app:destination="@id/cast_dest" />
+
+        <action
+            android:id="@+id/navigate_to_movie_list"
+            app:destination="@id/movie_list_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/cast_dest"
+        android:name="com.itlifelang.extrememovie.mobile.ui.cast.CastFragment"
+        tools:layout="@layout/fragment_cast">
+
+        <argument
+            android:name="cast"
+            app:argType="com.itlifelang.extrememovie.mobile.data.Cast" />
+
+        <action
+            android:id="@+id/navigate_to_movie_detail"
+            app:destination="@id/movie_detail_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/crew_dest"
+        android:name="com.itlifelang.extrememovie.mobile.ui.crew.CrewFragment"
+        tools:layout="@layout/fragment_crew">
+
+        <argument
+            android:name="crew"
+            app:argType="com.itlifelang.extrememovie.mobile.data.Crew" />
+
+        <action
+            android:id="@+id/navigate_to_movie_detail"
+            app:destination="@id/movie_detail_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/search_dest"
+        android:name="com.itlifelang.extrememovie.mobile.ui.moviesearch.MovieSearchFragment"
+        tools:layout="@layout/fragment_movie_search">
+
+        <action
+            android:id="@+id/navigate_to_movie_detail"
+            app:destination="@id/movie_detail_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/movie_list_dest"
+        android:name="com.itlifelang.extrememovie.mobile.ui.movielist.MovieListFragment"
+        tools:layout="@layout/fragment_movie_list">
+
+        <argument
+            android:name="genre"
+            app:argType="com.itlifelang.extrememovie.mobile.data.Genre" />
+
+        <action
+            android:id="@+id/navigate_to_search"
+            app:destination="@id/search_dest" />
+
+        <action
+            android:id="@+id/navigate_to_movie_detail"
+            app:destination="@id/movie_detail_dest" />
+    </fragment>
+</navigation>
