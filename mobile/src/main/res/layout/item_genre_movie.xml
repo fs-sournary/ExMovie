@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.itlifelang.extrememovie.shared.BuildConfig" />
+
+        <variable
+            name="transitionName"
+            type="String" />
+
+        <variable
+            name="item"
+            type="com.itlifelang.extrememovie.mobile.data.Movie" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="?attr/selectableItemBackground"
+        android:transitionName="@{transitionName}">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/poster_image"
+            android:layout_width="240dp"
+            android:layout_height="140dp"
+            app:centerCrop="@{true}"
+            app:glideImageUrl="@{BuildConfig.BASE_IMAGE_URL + item.posterPath}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.ExtremeMovie.ImageView.GenreMovie"
+            tools:scaleType="centerCrop"
+            tools:src="@drawable/img_item_first_intro_movie_background" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/back_drop_image"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            app:centerCrop="@{true}"
+            app:glideImageUrl="@{BuildConfig.BASE_IMAGE_URL + item.backdropPath}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/poster_image"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.ExtremeMovie.ImageView.GenreMovie"
+            tools:scaleType="centerCrop"
+            tools:src="@drawable/img_item_first_intro_movie_background" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="@{item.title}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/back_drop_image"
+            app:layout_constraintTop_toTopOf="@id/back_drop_image"
+            tools:text="Black clover" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/vote_average_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{String.valueOf(item.voteAverage)}"
+            android:textColor="@color/crimson"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/title_text"
+            app:layout_constraintTop_toBottomOf="@id/title_text"
+            tools:text="9.7" />
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:progressTint="@color/crimson"
+            android:rating="@{item.voteAverage.floatValue() / 2}"
+            app:layout_constraintBottom_toBottomOf="@id/vote_average_text"
+            app:layout_constraintStart_toEndOf="@id/vote_average_text"
+            app:layout_constraintTop_toTopOf="@id/vote_average_text"
+            tools:rating="4.7" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

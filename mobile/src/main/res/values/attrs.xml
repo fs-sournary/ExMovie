@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CollapsibleTextView">
+        <attr name="title" format="string" />
+        <attr name="description" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="DateSticker">
+        <attr name="android:width" />
+        <attr name="android:paddingTop" />
+        <attr name="android:textColor" />
+        <attr name="android:fontFamily" />
+        <attr name="dateTextSize" format="dimension" />
+        <attr name="dayTextSize" format="dimension" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/cast_action"
+        android:icon="@drawable/ic_cast"
+        android:title="@string/movie_detail_cast_action"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/share_action"
+        android:icon="@drawable/ic_share"
+        android:title="@string/movie_detail_share_action"
+        app:showAsAction="ifRoom" />
+</menu>

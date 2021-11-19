@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.itlifelang.extrememovie.shared.BuildConfig" />
+
+        <variable
+            name="item"
+            type="com.itlifelang.extrememovie.mobile.data.Author" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/avatar_image"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            app:centerCrop="@{true}"
+            app:circleCrop="@{true}"
+            app:glideErrorImage="@{@drawable/ic_account_circle}"
+            app:glideImageUrl="@{BuildConfig.BASE_IMAGE_URL + item.authorDetails.avatarPath}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/img_item_first_intro_movie_background" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/name_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{item.author}"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/avatar_image"
+            app:layout_constraintTop_toTopOf="@id/avatar_image"
+            tools:text="Black clover" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/time_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{item.updatedAt}"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/name_text"
+            app:layout_constraintStart_toStartOf="@id/name_text"
+            app:layout_constraintTop_toBottomOf="@id/name_text"
+            tools:text="Hom qua" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/comment_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:maxLines="3"
+            android:text="@{item.content}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/name_text"
+            app:layout_constraintTop_toBottomOf="@id/time_text"
+            tools:text="This is a comment" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

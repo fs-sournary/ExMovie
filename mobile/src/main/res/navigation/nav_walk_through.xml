@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_walk_through"
+    app:startDestination="@id/walk_through_first_step">
+
+    <fragment
+        android:id="@+id/walk_through_first_step"
+        android:name="com.itlifelang.extrememovie.mobile.ui.walkthroughfirststep.WalkThroughFirstStepFragment"
+        tools:layout="@layout/fragment_walk_through_first_step">
+
+        <action
+            android:id="@+id/navigate_to_second_step"
+            app:destination="@id/walk_through_second_step" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/walk_through_second_step"
+        android:name="com.itlifelang.extrememovie.mobile.ui.walkthroughsecondstep.WalkThroughSecondStepFragment"
+        tools:layout="@layout/fragment_walk_through_second_step">
+
+        <action
+            android:id="@+id/navigate_to_third_step"
+            app:destination="@id/walk_through_third_step" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/walk_through_third_step"
+        android:name="com.itlifelang.extrememovie.mobile.ui.walkthroughthirdstep.WalkThroughThirdStepFragment"
+        tools:layout="@layout/fragment_walk_through_third_step">
+
+        <action
+            android:id="@+id/navigate_to_main"
+            app:destination="@id/main_activity" />
+    </fragment>
+
+    <activity
+        android:id="@+id/main_activity"
+        android:name="com.itlifelang.extrememovie.mobile.ui.MainActivity"
+        tools:layout="@layout/activity_main" />
+</navigation>
