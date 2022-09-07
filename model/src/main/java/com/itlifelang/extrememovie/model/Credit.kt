@@ -2,7 +2,7 @@
  * Copyright 2021 ItLifeLang LLC
  */
 
-package com.itlifelang.extrememovie.mobile.data
+package com.itlifelang.extrememovie.model
 
 data class Credit(
     val id: Int? = null,

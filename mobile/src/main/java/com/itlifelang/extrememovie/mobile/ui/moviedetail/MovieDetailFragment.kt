@@ -4,7 +4,6 @@
 
 package com.itlifelang.extrememovie.mobile.ui.moviedetail
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -20,10 +19,10 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.transition.MaterialElevationScale
 import com.itlifelang.extrememovie.R
 import com.itlifelang.extrememovie.databinding.FragmentMovieDetailBinding
-import com.itlifelang.extrememovie.mobile.data.Genre
-import com.itlifelang.extrememovie.mobile.data.Video
 import com.itlifelang.extrememovie.mobile.ui.BindingFragment
 import com.itlifelang.extrememovie.mobile.ui.moviereview.MovieReviewFragment
+import com.itlifelang.extrememovie.model.Genre
+import com.itlifelang.extrememovie.model.Video
 import com.itlifelang.extrememovie.shared.extension.autoClear
 import com.itlifelang.extrememovie.shared.extension.flowWithViewLifecycle
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,7 +31,6 @@ import kotlin.math.abs
 
 @AndroidEntryPoint
 class MovieDetailFragment : BindingFragment<FragmentMovieDetailBinding, MovieDetailViewModel>() {
-
     private val safeArgs: MovieDetailFragmentArgs by navArgs()
 
     private var similarMovieListAdapter: SimilarMovieListAdapter by autoClear()
@@ -45,7 +43,7 @@ class MovieDetailFragment : BindingFragment<FragmentMovieDetailBinding, MovieDet
     lateinit var viewModelFactory: MovieDetailViewModel.Factory
 
     override val viewModel: MovieDetailViewModel by viewModels {
-        MovieDetailViewModel.provideFactory(viewModelFactory, safeArgs.movie)
+        MovieDetailViewModel.provideFactory(viewModelFactory, safeArgs.movieId)
     }
 
     override val layoutId: Int = R.layout.fragment_movie_detail
@@ -68,7 +66,7 @@ class MovieDetailFragment : BindingFragment<FragmentMovieDetailBinding, MovieDet
         similarMovieListAdapter = SimilarMovieListAdapter { view, movie ->
             val movieDetailTransitionName = getString(R.string.movie_detail_transition_name)
             val extras = FragmentNavigatorExtras(view to movieDetailTransitionName)
-            val directions = MovieDetailFragmentDirections.navigateToMovieDetail(movie)
+            val directions = MovieDetailFragmentDirections.navigateToMovieDetail(movie.id ?: 0)
             navController.navigate(directions, extras)
         }
         binding.similarMovieList.adapter = similarMovieListAdapter
@@ -133,7 +131,7 @@ class MovieDetailFragment : BindingFragment<FragmentMovieDetailBinding, MovieDet
             val fraction = abs(verticalOffset).toFloat() / appBar.totalScrollRange
             val expandedAlpha = 1 - fraction
             binding.collapsingToolbar.title = when (expandedAlpha) {
-                0f -> safeArgs.movie.title
+                0f -> viewModel.movieDetail.value?.title
                 else -> null
             }
             binding.backDropImage.alpha = expandedAlpha
@@ -166,22 +164,21 @@ class MovieDetailFragment : BindingFragment<FragmentMovieDetailBinding, MovieDet
             viewModel.saveDeleteLibraryMovie()
         }
         binding.reviewButton.setOnClickListener {
-            val movieId = safeArgs.movie.id ?: return@setOnClickListener
-            movieReviewFragment.loadMovieReviews(movieId)
+            movieReviewFragment.loadMovieReviews(safeArgs.movieId)
             movieReviewFragment.open()
         }
     }
 
     private fun shareMovie() {
-        val title = safeArgs.movie.title ?: return
-        val intent = Intent().apply {
-            action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, title)
-            putExtra(Intent.EXTRA_TITLE, "Share movie")
-            type = "text/plain"
-        }
-        val sharedIntent = Intent.createChooser(intent, null)
-        startActivity(sharedIntent)
+//        val title = safeArgs.movie.title ?: return
+//        val intent = Intent().apply {
+//            action = Intent.ACTION_SEND
+//            putExtra(Intent.EXTRA_TEXT, title)
+//            putExtra(Intent.EXTRA_TITLE, "Share movie")
+//            type = "text/plain"
+//        }
+//        val sharedIntent = Intent.createChooser(intent, null)
+//        startActivity(sharedIntent)
     }
 
     private fun setupGenres(genres: List<Genre>?) {
@@ -196,7 +193,10 @@ class MovieDetailFragment : BindingFragment<FragmentMovieDetailBinding, MovieDet
             chip.setOnClickListener { view ->
                 val movieDetailTransitionName = getString(R.string.movie_list_transition_name)
                 val extras = FragmentNavigatorExtras(view to movieDetailTransitionName)
-                val directions = MovieDetailFragmentDirections.navigateToMovieList(it)
+                val directions = MovieDetailFragmentDirections.navigateToMovieList(
+                    name = it.name ?: "",
+                    id = it.id ?: 0
+                )
                 navController.navigate(directions, extras)
             }
             binding.genreChipGroup.addView(chip)

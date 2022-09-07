@@ -11,12 +11,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.insertSeparators
 import androidx.paging.map
-import com.itlifelang.extrememovie.mobile.data.HistorySearch
-import com.itlifelang.extrememovie.mobile.data.HistorySearch.SearchMovie
-import com.itlifelang.extrememovie.mobile.data.HistorySearch.Separator
-import com.itlifelang.extrememovie.mobile.data.Movie
-import com.itlifelang.extrememovie.mobile.mapper.mapToMobile
-import com.itlifelang.extrememovie.mobile.mapper.mapToModel
+import com.itlifelang.extrememovie.model.Movie
 import com.itlifelang.extrememovie.shared.di.ApplicationScope
 import com.itlifelang.extrememovie.shared.usecase.search.GetSearchDatabaseMoviePagingUseCase
 import com.itlifelang.extrememovie.shared.usecase.search.GetSearchMoviePagingUseCase
@@ -54,7 +49,6 @@ class MovieSearchViewModel @Inject constructor(
     @ApplicationScope private val applicationScope: CoroutineScope,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-
     private val _uiAction = MutableSharedFlow<UiAction>()
 
     private val searchAction: Flow<UiAction.Search> = _uiAction
@@ -98,13 +92,13 @@ class MovieSearchViewModel @Inject constructor(
 
     private val _historyTimeFormat = MutableSharedFlow<String>()
 
-    val historySearchMovie: Flow<PagingData<HistorySearch>> = getSearchDatabaseMoviePagingUseCase()
+    val historyUi: Flow<PagingData<MovieSearch>> = getSearchDatabaseMoviePagingUseCase()
         .combine(_historyTimeFormat, ::Pair)
         .map { (pagingData, format) ->
             pagingData.map {
                 val insertedTime =
-                    SimpleDateFormat(format, Locale.getDefault()).format(Date(it.insertTime))
-                SearchMovie(it.movie.mapToMobile(), insertedTime)
+                    SimpleDateFormat(format, Locale.getDefault()).format(Date(it.second))
+                MovieSearch.Ui(it.first, insertedTime)
             }
         }
         .map {
@@ -113,19 +107,29 @@ class MovieSearchViewModel @Inject constructor(
         .cachedIn(viewModelScope)
 
     private fun searchMovie(query: String): Flow<PagingData<Movie>> =
-        getSearchMoviePagingUseCase(query)
-            .map { pagingData ->
-                pagingData.map { movie -> movie.mapToMobile() }
-            }
-            .cachedIn(viewModelScope)
+        getSearchMoviePagingUseCase(query).cachedIn(viewModelScope)
 
     private fun getHistorySearchMovieSeparators(
-        before: SearchMovie?,
-        after: SearchMovie?
-    ): Separator? = when {
-        after == null -> null // We're at the end of the list
-        before == null -> Separator(after.insertTime) // We are at the beginning of the list
-        else -> if (after.insertTime != before.insertTime) Separator(after.insertTime) else null
+        before: MovieSearch.Ui?,
+        after: MovieSearch.Ui?
+    ): MovieSearch.Separator? {
+        return when {
+            after == null -> {
+                // We're at the end of the list
+                null
+            }
+            before == null -> {
+                // We are at the beginning of the list
+                MovieSearch.Separator(after.insertTime)
+            }
+            else -> {
+                if (after.insertTime != before.insertTime) {
+                    MovieSearch.Separator(after.insertTime)
+                } else {
+                    null
+                }
+            }
+        }
     }
 
     /**
@@ -133,7 +137,7 @@ class MovieSearchViewModel @Inject constructor(
      * @param movie The movie is saved.
      */
     fun insertMovieToDatabase(movie: Movie) {
-        val params = Pair(movie.mapToModel(), System.currentTimeMillis())
+        val params = Pair(movie, System.currentTimeMillis())
         applicationScope.launch { saveHistorySearchMovieUseCase(params) }
     }
 
@@ -149,7 +153,6 @@ private const val LAST_SEARCH_QUERY = "last_search_query"
 private const val LAST_SCROLLED_QUERY = "last_scrolled_query"
 
 sealed class UiAction {
-
     data class Search(val query: String) : UiAction()
 
     data class Scroll(val currentQuery: String) : UiAction()
@@ -161,3 +164,9 @@ data class UiState(
     val hasNotScrolledForCurrentSearch: Boolean = false,
     val pagingData: PagingData<Movie> = PagingData.empty()
 )
+
+sealed class MovieSearch {
+    data class Ui(val movie: Movie, val insertTime: String) : MovieSearch()
+
+    data class Separator(val time: String) : MovieSearch()
+}

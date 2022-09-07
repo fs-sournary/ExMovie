@@ -7,6 +7,7 @@ package com.itlifelang.extrememovie.shared.data.db
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.itlifelang.extrememovie.model.Movie
 
 /**
  * The class represents Movie that is stored in Room.
@@ -66,3 +67,42 @@ data class SearchMovieEntity(
     @ColumnInfo(name = "insertTime")
     val insertTime: Long
 )
+
+fun SearchMovieEntity.toModel(): Movie {
+    return Movie(
+        id = id,
+        adult = adult,
+        backdropPath = backdropPath,
+        genreIds = genreIds,
+        originalLanguage = originalLanguage,
+        originalTitle = originalTitle,
+        overview = overview,
+        popularity = popularity,
+        posterPath = posterPath,
+        releaseDate = releaseDate,
+        title = title,
+        video = video,
+        voteAverage = voteAverage,
+        voteCount = voteCount
+    )
+}
+
+fun Movie.toEntity(insertTime: Long): SearchMovieEntity {
+    return SearchMovieEntity(
+        id = id ?: 0,
+        adult = adult,
+        backdropPath = backdropPath,
+        genreIds = genreIds,
+        originalLanguage = originalLanguage,
+        originalTitle = originalTitle,
+        overview = overview,
+        popularity = popularity,
+        posterPath = posterPath,
+        releaseDate = releaseDate,
+        title = title,
+        video = video,
+        voteAverage = voteAverage,
+        voteCount = voteCount,
+        insertTime = insertTime
+    )
+}

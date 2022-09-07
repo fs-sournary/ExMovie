@@ -6,10 +6,8 @@ package com.itlifelang.extrememovie.mobile.ui.movie
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.itlifelang.extrememovie.mobile.data.Genre
-import com.itlifelang.extrememovie.mobile.data.Movie
-import com.itlifelang.extrememovie.mobile.mapper.mapToMobile
-import com.itlifelang.extrememovie.model.MovieModel
+import com.itlifelang.extrememovie.model.Genre
+import com.itlifelang.extrememovie.model.Movie
 import com.itlifelang.extrememovie.shared.result.Result
 import com.itlifelang.extrememovie.shared.result.data
 import com.itlifelang.extrememovie.shared.usecase.movie.GetFirstPageGenreMovieUseCase
@@ -38,7 +36,6 @@ class MovieViewModel @Inject constructor(
     getGenreListUseCase: GetGenreListUseCase,
     getFirstPageGenreMovieUseCase: GetFirstPageGenreMovieUseCase
 ) : ViewModel() {
-
     private var shouldScrollGenreMovie: Boolean = false
 
     // Determine that the user device has network or not.
@@ -48,10 +45,7 @@ class MovieViewModel @Inject constructor(
 
     val nowPlayingMovies: StateFlow<List<Movie>?> = _hasConnection.flatMapLatest { hasConnection ->
         if (hasConnection) {
-            getFirstPageNowPlayingMovieUseCase(Unit)
-                .map {
-                    it.data?.map { movie -> movie.mapToMobile() }
-                }
+            getFirstPageNowPlayingMovieUseCase(Unit).map { it.data }
         } else {
             flowOf(null)
         }
@@ -59,10 +53,7 @@ class MovieViewModel @Inject constructor(
 
     val topRatedMovies: StateFlow<List<Movie>?> = _hasConnection.flatMapLatest { hasConnection ->
         if (hasConnection) {
-            getFirstPageTopRatedMovieUseCase(Unit)
-                .map {
-                    it.data?.map { movie -> movie.mapToMobile() }
-                }
+            getFirstPageTopRatedMovieUseCase(Unit).map { it.data }
         } else {
             flowOf(null)
         }
@@ -70,10 +61,7 @@ class MovieViewModel @Inject constructor(
 
     val popularMovies: StateFlow<List<Movie>?> = _hasConnection.flatMapLatest { hasConnection ->
         if (hasConnection) {
-            getFirstPagePopularMovieUseCase(Unit)
-                .map {
-                    it.data?.map { movie -> movie.mapToMobile() }
-                }
+            getFirstPagePopularMovieUseCase(Unit).map { it.data }
         } else {
             flowOf(null)
         }
@@ -81,10 +69,7 @@ class MovieViewModel @Inject constructor(
 
     val upComingMovies: StateFlow<List<Movie>?> = _hasConnection.flatMapLatest { hasConnection ->
         if (hasConnection) {
-            getFirstPageUpComingMovieUseCase(Unit)
-                .map {
-                    it.data?.map { movie -> movie.mapToMobile() }
-                }
+            getFirstPageUpComingMovieUseCase(Unit).map { it.data }
         } else {
             flowOf(null)
         }
@@ -95,7 +80,7 @@ class MovieViewModel @Inject constructor(
         if (hasConnection) {
             getGenreListUseCase(Unit)
                 .map {
-                    val genres = it.data?.map { genre -> genre.mapToMobile() }
+                    val genres = it.data
                     setGenre(genres?.getOrNull(0))
                     genres
                 }
@@ -106,12 +91,14 @@ class MovieViewModel @Inject constructor(
 
     private val _genre = MutableStateFlow<Genre?>(null)
     val genre: StateFlow<Genre?> = _genre
-    private val genreMovieResult: StateFlow<Result<List<MovieModel>>> = _genre.flatMapLatest {
+
+    private val genreMovieResult: StateFlow<Result<List<Movie>>> = _genre.flatMapLatest {
         val id = it?.id ?: return@flatMapLatest flowOf(Result.Error(Exception("Genre id is empty")))
         getFirstPageGenreMovieUseCase(id)
     }.stateIn(viewModelScope, Lazily, Result.Loading)
+
     val genreMovies: StateFlow<List<Movie>?> = genreMovieResult.mapLatest { movieResult ->
-        movieResult.data?.map { movie -> movie.mapToMobile() }
+        movieResult.data
     }.stateIn(viewModelScope, Lazily, null)
 
     fun setGenre(newGenre: Genre?) {

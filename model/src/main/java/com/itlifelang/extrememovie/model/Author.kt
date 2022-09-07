@@ -4,9 +4,9 @@
 
 package com.itlifelang.extrememovie.model
 
-data class AuthorModel(
+data class Author(
     val author: String? = null,
-    val authorDetails: AuthorDetailModel? = null,
+    val authorDetails: AuthorDetail? = null,
     val content: String? = null,
     val createdAt: String? = null,
     val id: String? = null,

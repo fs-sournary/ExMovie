@@ -5,6 +5,7 @@
 package com.itlifelang.extrememovie.shared.data.api
 
 import com.google.gson.annotations.SerializedName
+import com.itlifelang.extrememovie.model.Genre
 
 data class GenreResponse(
     @SerializedName("id")
@@ -12,3 +13,5 @@ data class GenreResponse(
     @SerializedName("name")
     val name: String? = null
 )
+
+fun GenreResponse.toModel(): Genre = Genre(id, name)

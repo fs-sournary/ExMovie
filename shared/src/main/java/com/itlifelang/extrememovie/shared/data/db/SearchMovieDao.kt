@@ -10,7 +10,6 @@ import androidx.room.Query
 
 @Dao
 interface SearchMovieDao : BaseDao<SearchMovieEntity> {
-
     @Query("SELECT * FROM search_movie ORDER BY insertTime DESC")
     fun getSearchMovies(): PagingSource<Int, SearchMovieEntity>
 }

@@ -9,12 +9,11 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.itlifelang.extrememovie.model.ThemeModel
+import com.itlifelang.extrememovie.model.Theme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class DataStorePreference(private val dataStore: DataStore<Preferences>) : AppPreference {
-
     override suspend fun saveAccessToken(accessToken: String) {
         dataStore.edit { it[PREF_ACCESS_TOKEN] = accessToken }
     }
@@ -26,7 +25,7 @@ class DataStorePreference(private val dataStore: DataStore<Preferences>) : AppPr
     }
 
     override val theme: Flow<String> = dataStore.data.map {
-        it[PREF_THEME] ?: ThemeModel.System.key
+        it[PREF_THEME] ?: Theme.System.key
     }
 
     override suspend fun saveLaunchWalkThrough(isLaunch: Boolean) {
@@ -46,7 +45,6 @@ class DataStorePreference(private val dataStore: DataStore<Preferences>) : AppPr
     }
 
     companion object {
-
         const val PREF_NAME = "extreme_movie_preference"
 
         val PREF_ACCESS_TOKEN = stringPreferencesKey("pref_access_token")

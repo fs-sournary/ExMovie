@@ -9,13 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.itlifelang.extrememovie.databinding.ItemCategoryTelevisionBinding
-import com.itlifelang.extrememovie.mobile.data.Television
+import com.itlifelang.extrememovie.model.Television
 
 class CategoryTelevisionViewHolder(
     private val binding: ItemCategoryTelevisionBinding,
     private val click: (View, Television) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
-
     fun bindData(television: Television) {
         binding.root.setOnClickListener { click(it, television) }
         binding.apply {
@@ -25,7 +24,6 @@ class CategoryTelevisionViewHolder(
     }
 
     companion object {
-
         fun create(
             parent: ViewGroup,
             click: (View, Television) -> Unit

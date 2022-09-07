@@ -21,13 +21,11 @@ import androidx.room.TypeConverters
     ]
 )
 abstract class AppDatabase : RoomDatabase() {
-
     abstract fun getSearchMovieDao(): SearchMovieDao
 
     abstract fun getLibraryMovieDao(): LibraryMovieDao
 
     companion object {
-
         const val DB_NAME = "extreme_movie.db"
     }
 }

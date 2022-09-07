@@ -12,7 +12,6 @@ import com.itlifelang.extrememovie.databinding.ItemHistorySearchMovieSeparatorBi
 class HistorySearchMovieSeparatorViewHolder(
     private val binding: ItemHistorySearchMovieSeparatorBinding
 ) : RecyclerView.ViewHolder(binding.root) {
-
     fun bind(time: String) {
         binding.apply {
             title = time
@@ -21,7 +20,6 @@ class HistorySearchMovieSeparatorViewHolder(
     }
 
     companion object {
-
         fun create(parent: ViewGroup): HistorySearchMovieSeparatorViewHolder {
             val inflater = LayoutInflater.from(parent.context)
             val binding = ItemHistorySearchMovieSeparatorBinding.inflate(inflater, parent, false)

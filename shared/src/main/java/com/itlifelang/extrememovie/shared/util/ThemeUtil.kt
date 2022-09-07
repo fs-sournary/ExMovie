@@ -5,18 +5,17 @@
 package com.itlifelang.extrememovie.shared.util
 
 import androidx.appcompat.app.AppCompatDelegate
-import com.itlifelang.extrememovie.model.ThemeModel
-import com.itlifelang.extrememovie.model.ThemeModel.BatterySaver
-import com.itlifelang.extrememovie.model.ThemeModel.Dark
-import com.itlifelang.extrememovie.model.ThemeModel.Light
-import com.itlifelang.extrememovie.model.ThemeModel.System
+import com.itlifelang.extrememovie.model.Theme
+import com.itlifelang.extrememovie.model.Theme.BatterySaver
+import com.itlifelang.extrememovie.model.Theme.Dark
+import com.itlifelang.extrememovie.model.Theme.Light
+import com.itlifelang.extrememovie.model.Theme.System
 
 /**
  * Update the app theme base on user setting
  */
 object ThemeUtil {
-
-    fun getThemeFromPreferenceKey(key: String): ThemeModel = when (key) {
+    fun getThemeFromPreferenceKey(key: String): Theme = when (key) {
         Light.key -> Light
         Dark.key -> Dark
         System.key -> System
@@ -24,7 +23,7 @@ object ThemeUtil {
         else -> Light
     }
 
-    fun updateTheme(theme: ThemeModel) {
+    fun updateTheme(theme: Theme) {
         val mode = when (theme) {
             is Light -> AppCompatDelegate.MODE_NIGHT_NO
             is Dark -> AppCompatDelegate.MODE_NIGHT_YES

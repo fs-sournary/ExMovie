@@ -29,7 +29,6 @@ class CollapsibleTextView @JvmOverloads constructor(
     attr: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : FrameLayout(context, attr, defStyleAttr) {
-
     private var expanded = true
 
     private var toggleTransition: Transition = TransitionSet().apply {
@@ -82,7 +81,6 @@ class CollapsibleTextView @JvmOverloads constructor(
     }
 
     internal class SavedState : BaseSavedState {
-
         var expanded = true
 
         constructor(source: Parcel) : super(source) {
@@ -97,7 +95,6 @@ class CollapsibleTextView @JvmOverloads constructor(
         }
 
         companion object {
-
             @JvmField
             val CREATOR = object : Parcelable.Creator<SavedState> {
                 override fun createFromParcel(source: Parcel): SavedState = SavedState(source)

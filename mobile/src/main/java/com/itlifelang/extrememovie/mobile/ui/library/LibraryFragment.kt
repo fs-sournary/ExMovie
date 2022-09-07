@@ -22,7 +22,6 @@ import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class LibraryFragment : BindingFragment<FragmentLibraryBinding, LibraryViewModel>() {
-
     private var libraryMoviePagingDataAdapter: LibraryMoviePagingDataAdapter by autoClear()
 
     override val viewModel: LibraryViewModel by viewModels()
@@ -39,7 +38,7 @@ class LibraryFragment : BindingFragment<FragmentLibraryBinding, LibraryViewModel
         libraryMoviePagingDataAdapter = LibraryMoviePagingDataAdapter { _, movie ->
             exitTransition = MaterialElevationScale(false)
             reenterTransition = MaterialElevationScale(true)
-            val directions = LibraryFragmentDirections.navigateToMovieDetail(movie)
+            val directions = LibraryFragmentDirections.navigateToMovieDetail(movie.id ?: 0)
             navController.navigate(directions)
         }
         binding.movieList.adapter = libraryMoviePagingDataAdapter
@@ -47,7 +46,7 @@ class LibraryFragment : BindingFragment<FragmentLibraryBinding, LibraryViewModel
             libraryMoviePagingDataAdapter.loadStateFlow.collectLatest {
                 binding.movieList.isVisible = it.refresh is LoadState.NotLoading
                 binding.emptyMovieText.isVisible = it.refresh is LoadState.NotLoading &&
-                    libraryMoviePagingDataAdapter.itemCount == 0
+                        libraryMoviePagingDataAdapter.itemCount == 0
             }
         }
         viewModel.libraryMovies.asLiveData().observe(viewLifecycleOwner) {

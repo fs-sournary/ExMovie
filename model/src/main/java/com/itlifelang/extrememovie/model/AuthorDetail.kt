@@ -4,7 +4,7 @@
 
 package com.itlifelang.extrememovie.model
 
-data class AuthorDetailModel(
+data class AuthorDetail(
     val name: String? = null,
     val username: String? = null,
     val avatarPath: String? = null,

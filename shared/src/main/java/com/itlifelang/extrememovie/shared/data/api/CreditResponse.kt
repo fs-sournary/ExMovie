@@ -5,6 +5,7 @@
 package com.itlifelang.extrememovie.shared.data.api
 
 import com.google.gson.annotations.SerializedName
+import com.itlifelang.extrememovie.model.Credit
 
 data class CreditResponse(
     @SerializedName("id")
@@ -14,3 +15,11 @@ data class CreditResponse(
     @SerializedName("crew")
     val crew: List<CrewResponse>? = null
 )
+
+fun CreditResponse.toModel(): Credit {
+    return Credit(
+        id = id,
+        cast = cast?.map { it.toModel() },
+        crew = crew?.map { it.toModel() }
+    )
+}

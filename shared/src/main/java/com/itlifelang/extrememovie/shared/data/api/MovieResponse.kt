@@ -5,22 +5,17 @@
 package com.itlifelang.extrememovie.shared.data.api
 
 import com.google.gson.annotations.SerializedName
+import com.itlifelang.extrememovie.model.Movie
 
 data class MovieResponse(
     @SerializedName("id")
     val id: Int? = null,
-    @SerializedName("imdb_id")
-    val imdbId: String? = null,
     @SerializedName("adult")
     val adult: Boolean? = null,
     @SerializedName("backdrop_path")
     val backdropPath: String? = null,
-    @SerializedName("budget")
-    val budget: Int? = null,
     @SerializedName("genre_ids")
     val genreIds: List<Int>? = null,
-    @SerializedName("homepage")
-    val homepage: String? = null,
     @SerializedName("original_language")
     val originalLanguage: String? = null,
     @SerializedName("original_title")
@@ -31,20 +26,8 @@ data class MovieResponse(
     val popularity: Double? = null,
     @SerializedName("poster_path")
     val posterPath: String? = null,
-    @SerializedName("production_countries")
-    val productionCountries: List<ProductionCountryResponse>? = null,
     @SerializedName("release_date")
     val releaseDate: String? = null,
-    @SerializedName("revenue")
-    val revenue: Int? = null,
-    @SerializedName("runtime")
-    val runtime: Int? = null,
-    @SerializedName("spoken_languages")
-    val spokenLanguages: List<SpokenLanguageResponse>? = null,
-    @SerializedName("status")
-    val status: String? = null,
-    @SerializedName("tagline")
-    val tagLine: String? = null,
     @SerializedName("title")
     val title: String? = null,
     @SerializedName("video")
@@ -54,3 +37,22 @@ data class MovieResponse(
     @SerializedName("vote_count")
     val voteCount: Int? = null
 )
+
+fun MovieResponse.toModel(): Movie {
+    return Movie(
+        id = id,
+        adult = adult,
+        backdropPath = backdropPath,
+        genreIds = genreIds?.map { it },
+        originalLanguage = originalLanguage,
+        originalTitle = originalTitle,
+        overview = overview,
+        popularity = popularity,
+        posterPath = posterPath,
+        releaseDate = releaseDate,
+        title = title,
+        video = video,
+        voteAverage = voteAverage,
+        voteCount = voteCount
+    )
+}

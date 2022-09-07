@@ -11,26 +11,29 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ExtremeMovie">
+        android:theme="@style/Theme.App.Starting">
 
         <activity
             android:name=".mobile.ui.LauncherActivity"
             android:exported="true"
-            android:theme="@style/Theme.ExtremeMovie.Launcher">
+            android:theme="@style/Theme.App.Starting">
+
+        </activity>
+
+        <activity
+            android:name=".mobile.ui.WalkThroughActivity"
+            android:theme="@style/Theme.App.Main" />
+
+        <activity
+            android:name=".mobile.ui.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.App.Starting" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".mobile.ui.WalkThroughActivity"
-            android:theme="@style/Theme.ExtremeMovie.WalkThrough" />
-
-        <activity
-            android:name=".mobile.ui.MainActivity"
-            android:theme="@style/Theme.ExtremeMovie.Main" />
     </application>
 
     <queries>

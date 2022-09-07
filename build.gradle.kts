@@ -12,9 +12,6 @@ buildscript {
         classpath(Lib.KOTLIN_ALLOPEN)
         classpath(Lib.NAVIGATION_SAFE_ARGS)
         classpath(Lib.HILT_GRADLE_PLUGIN)
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
     }
 }
 
@@ -54,6 +51,7 @@ subprojects {
         }
     }
     tasks.withType<KotlinCompile>().configureEach {
-        kotlinOptions.freeCompilerArgs += "-Xjvm-default=enable"
+        kotlinOptions.freeCompilerArgs +=
+            "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi"
     }
 }

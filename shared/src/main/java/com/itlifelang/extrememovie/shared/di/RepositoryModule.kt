@@ -23,7 +23,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 object RepositoryModule {
-
     @Singleton
     @Provides
     fun provideMovieRepository(): MovieRepository = DefaultMovieRepository()

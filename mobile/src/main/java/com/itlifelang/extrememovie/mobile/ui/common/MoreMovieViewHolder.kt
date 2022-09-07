@@ -14,13 +14,11 @@ class MoreMovieViewHolder(
     private val binding: ItemMoreMovieBinding,
     private val viewMoreAction: (View) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
-
     fun bindData() {
         binding.moreAction.setOnClickListener { viewMoreAction(it) }
     }
 
     companion object {
-
         fun create(parent: ViewGroup, click: (View) -> Unit): MoreMovieViewHolder {
             val inflater = LayoutInflater.from(parent.context)
             val binding = ItemMoreMovieBinding.inflate(inflater, parent, false)

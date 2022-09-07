@@ -26,7 +26,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 object DataSourceModule {
-
     private val Context.dataStore by preferencesDataStore(
         name = DataStorePreference.PREF_NAME,
         produceMigrations = {
@@ -36,8 +35,9 @@ object DataSourceModule {
 
     @Singleton
     @Provides
-    fun provideAppPreference(@ApplicationContext context: Context): AppPreference =
-        DataStorePreference(context.dataStore)
+    fun provideAppPreference(@ApplicationContext context: Context): AppPreference {
+        return DataStorePreference(context.dataStore)
+    }
 
     @Singleton
     @Provides
@@ -45,13 +45,15 @@ object DataSourceModule {
 
     @Singleton
     @Provides
-    fun provideTelevisionApi(): TelevisionApi =
-        ApiManager.getRetrofit().create(TelevisionApi::class.java)
+    fun provideTelevisionApi(): TelevisionApi {
+        return ApiManager.getRetrofit().create(TelevisionApi::class.java)
+    }
 
     @Singleton
     @Provides
-    fun provideAppDataBase(@ApplicationContext context: Context): AppDatabase =
-        Room.databaseBuilder(context, AppDatabase::class.java, AppDatabase.DB_NAME).build()
+    fun provideAppDataBase(@ApplicationContext context: Context): AppDatabase {
+        return Room.databaseBuilder(context, AppDatabase::class.java, AppDatabase.DB_NAME).build()
+    }
 
     @Singleton
     @Provides
@@ -59,7 +61,7 @@ object DataSourceModule {
 
     @Singleton
     @Provides
-    fun provideLibraryMovieDao(
-        database: AppDatabase
-    ): LibraryMovieDao = database.getLibraryMovieDao()
+    fun provideLibraryMovieDao(database: AppDatabase): LibraryMovieDao {
+        return database.getLibraryMovieDao()
+    }
 }

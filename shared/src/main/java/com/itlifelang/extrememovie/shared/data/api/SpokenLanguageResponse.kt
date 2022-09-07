@@ -5,6 +5,7 @@
 package com.itlifelang.extrememovie.shared.data.api
 
 import com.google.gson.annotations.SerializedName
+import com.itlifelang.extrememovie.model.SpokenLanguage
 
 data class SpokenLanguageResponse(
     @SerializedName("iso_639_1")
@@ -12,3 +13,5 @@ data class SpokenLanguageResponse(
     @SerializedName("name")
     val name: String? = null
 )
+
+fun SpokenLanguageResponse.toModel(): SpokenLanguage = SpokenLanguage(iso6391, name)

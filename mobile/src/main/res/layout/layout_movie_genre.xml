@@ -7,5 +7,6 @@
     app:chipStrokeWidth="1dp"
     app:chipBackgroundColor="?attr/colorSurface"
     app:chipStrokeColor="@color/dark_scrim"
+    app:chipCornerRadius="8dp"
     android:layout_height="wrap_content"
     tools:text="Action" />

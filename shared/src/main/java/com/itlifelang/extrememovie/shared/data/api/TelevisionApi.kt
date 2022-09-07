@@ -9,7 +9,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface TelevisionApi {
-
     @GET("tv/airing_today")
     suspend fun getAiringTodayTelevisions(@Query("page") page: Int): TelevisionResultResponse
 

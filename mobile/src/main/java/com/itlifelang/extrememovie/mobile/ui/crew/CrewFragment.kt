@@ -10,7 +10,6 @@ import com.itlifelang.extrememovie.databinding.FragmentCrewBinding
 import com.itlifelang.extrememovie.mobile.ui.BindingFragment
 
 class CrewFragment : BindingFragment<FragmentCrewBinding, CrewViewModel>() {
-
     override val viewModel: CrewViewModel by viewModels()
 
     override val layoutId: Int = R.layout.fragment_crew

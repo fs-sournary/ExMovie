@@ -25,7 +25,6 @@ class FirebaseAnalyticsHelper(
     @ApplicationScope private val externalScope: CoroutineScope,
     private val appPreference: AppPreference
 ) : AnalyticsHelper {
-
     private val firebaseAnalytics: FirebaseAnalytics = Firebase.analytics
 
     init {
@@ -76,7 +75,6 @@ class FirebaseAnalyticsHelper(
     }
 
     companion object {
-
         private const val ANALYTICS_ENABLE_ACTION = "enable"
         private const val ANALYTICS_DISABLE_ACTION = "disable"
     }

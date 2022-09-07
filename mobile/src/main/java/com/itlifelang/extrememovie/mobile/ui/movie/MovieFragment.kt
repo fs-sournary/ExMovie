@@ -11,11 +11,14 @@ import com.google.android.material.transition.MaterialElevationScale
 import com.google.android.material.transition.MaterialSharedAxis
 import com.itlifelang.extrememovie.R
 import com.itlifelang.extrememovie.databinding.FragmentMovieBinding
-import com.itlifelang.extrememovie.mobile.data.Genre
-import com.itlifelang.extrememovie.mobile.data.Movie
 import com.itlifelang.extrememovie.mobile.ui.BindingFragment
 import com.itlifelang.extrememovie.mobile.ui.MainActivity
-import com.itlifelang.extrememovie.mobile.ui.movie.GenreName.*
+import com.itlifelang.extrememovie.mobile.ui.movie.GenreName.NowPLaying
+import com.itlifelang.extrememovie.mobile.ui.movie.GenreName.Popular
+import com.itlifelang.extrememovie.mobile.ui.movie.GenreName.TopRated
+import com.itlifelang.extrememovie.mobile.ui.movie.GenreName.UpComing
+import com.itlifelang.extrememovie.model.Genre
+import com.itlifelang.extrememovie.model.Movie
 import com.itlifelang.extrememovie.shared.extension.autoClear
 import com.itlifelang.extrememovie.shared.extension.flowWithViewLifecycle
 import com.itlifelang.extrememovie.shared.util.ConnectivityHelper
@@ -23,7 +26,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MovieFragment : BindingFragment<FragmentMovieBinding, MovieViewModel>() {
-
     private var introMovieListAdapter: IntroMovieListAdapter by autoClear()
     private var nowPlayingListAdapter: CategoryMovieListAdapter by autoClear()
     private var topRatedListAdapter: CategoryMovieListAdapter by autoClear()
@@ -158,7 +160,7 @@ class MovieFragment : BindingFragment<FragmentMovieBinding, MovieViewModel>() {
     private fun navigateToMovieDetail(movie: Movie) {
         exitTransition = MaterialElevationScale(false)
         reenterTransition = MaterialElevationScale(true)
-        val directions = MovieFragmentDirections.navigateToMovieDetail(movie)
+        val directions = MovieFragmentDirections.navigateToMovieDetail(movie.id ?: 0)
         navController.navigate(directions)
     }
 
@@ -187,7 +189,7 @@ class MovieFragment : BindingFragment<FragmentMovieBinding, MovieViewModel>() {
     private fun navigateToMovieList(genre: Genre) {
         exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true)
         reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
-        val direction = MovieFragmentDirections.navigateToMovieList(genre)
+        val direction = MovieFragmentDirections.navigateToMovieList(genre.name ?: "", genre.id ?: 0)
         navController.navigate(direction)
     }
 }

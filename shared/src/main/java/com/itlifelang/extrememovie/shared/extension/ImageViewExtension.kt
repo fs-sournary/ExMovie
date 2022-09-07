@@ -11,7 +11,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 @BindingAdapter(
-    value = ["glideImageUrl", "glidePlaceHolder", "glideErrorImage", "centerCrop", "centerInside", "circleCrop"],
+    value = [
+        "glideImageUrl",
+        "glidePlaceHolder",
+        "glideErrorImage",
+        "centerCrop",
+        "centerInside",
+        "circleCrop"
+    ],
     requireAll = false
 )
 fun ImageView.setImageUrl(

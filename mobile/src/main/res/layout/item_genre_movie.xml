@@ -13,7 +13,7 @@
 
         <variable
             name="item"
-            type="com.itlifelang.extrememovie.mobile.data.Movie" />
+            type="com.itlifelang.extrememovie.model.Movie" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +25,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/poster_image"
-            android:layout_width="240dp"
+            android:layout_width="220dp"
             android:layout_height="140dp"
             app:centerCrop="@{true}"
             app:glideImageUrl="@{BuildConfig.BASE_IMAGE_URL + item.posterPath}"
@@ -39,7 +39,7 @@
             android:id="@+id/back_drop_image"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             app:centerCrop="@{true}"
             app:glideImageUrl="@{BuildConfig.BASE_IMAGE_URL + item.backdropPath}"
             app:layout_constraintStart_toStartOf="parent"

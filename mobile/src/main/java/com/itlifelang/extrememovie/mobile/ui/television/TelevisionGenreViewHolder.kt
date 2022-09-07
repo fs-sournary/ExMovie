@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.itlifelang.extrememovie.databinding.ItemGenreBinding
-import com.itlifelang.extrememovie.mobile.data.Genre
+import com.itlifelang.extrememovie.model.Genre
 import kotlinx.coroutines.flow.StateFlow
 
 class TelevisionGenreViewHolder(
@@ -19,7 +19,6 @@ class TelevisionGenreViewHolder(
     private val selectedGenre: StateFlow<Genre?>,
     private val click: (View, Genre) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
-
     fun bindData(genre: Genre) {
         binding.root.setOnClickListener { click(it, genre) }
         binding.apply {
@@ -31,7 +30,6 @@ class TelevisionGenreViewHolder(
     }
 
     companion object {
-
         fun create(
             parent: ViewGroup,
             lifecycleOwner: LifecycleOwner,

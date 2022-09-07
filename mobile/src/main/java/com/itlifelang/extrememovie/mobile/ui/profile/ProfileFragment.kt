@@ -15,7 +15,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ProfileFragment : BindingFragment<FragmentProfileBinding, ProfileViewModel>() {
-
     override val viewModel: ProfileViewModel by viewModels()
 
     override val layoutId: Int = R.layout.fragment_profile

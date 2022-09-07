@@ -2,12 +2,8 @@
  * Copyright 2021 ItLifeLang LLC
  */
 
-package com.itlifelang.extrememovie.mobile.data
+package com.itlifelang.extrememovie.model
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-
-@Parcelize
 data class Cast(
     val adult: Boolean? = null,
     val gender: Int? = null,
@@ -21,4 +17,4 @@ data class Cast(
     val character: String? = null,
     val creditId: String? = null,
     val order: Int? = null
-) : Parcelable
+)

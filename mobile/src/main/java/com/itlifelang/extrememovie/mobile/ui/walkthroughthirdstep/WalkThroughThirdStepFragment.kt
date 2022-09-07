@@ -15,7 +15,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class WalkThroughThirdStepFragment :
     BindingFragment<FragmentWalkThroughThirdStepBinding, WalkThroughThirdStepViewModel>() {
-
     override val viewModel: WalkThroughThirdStepViewModel by viewModels()
 
     override val layoutId: Int = R.layout.fragment_walk_through_third_step

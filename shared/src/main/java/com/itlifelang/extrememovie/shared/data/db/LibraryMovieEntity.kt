@@ -7,6 +7,7 @@ package com.itlifelang.extrememovie.shared.data.db
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.itlifelang.extrememovie.model.MovieDetail
 
 @Entity(tableName = "library_movie")
 data class LibraryMovieEntity(
@@ -57,4 +58,56 @@ data class LibraryMovieEntity(
     val voteAverage: Double? = null,
     @ColumnInfo(name = "voteCount")
     val voteCount: Int? = null
+)
+
+fun LibraryMovieEntity.toModel(): MovieDetail = MovieDetail(
+    id = id,
+    imdbId = imdbId,
+    adult = adult,
+    backdropPath = backdropPath,
+    budget = budget,
+    genreIds = genreIds,
+    homepage = homepage,
+    originalLanguage = originalLanguage,
+    originalTitle = originalTitle,
+    overview = overview,
+    popularity = popularity,
+    posterPath = posterPath,
+    productionCountries = productionCountries?.map { it.toModel() },
+    releaseDate = releaseDate,
+    revenue = revenue,
+    runtime = runtime,
+    spokenLanguages = spokenLanguages?.map { it.toModel() },
+    status = status,
+    tagLine = tagLine,
+    title = title,
+    video = video,
+    voteAverage = voteAverage,
+    voteCount = voteCount
+)
+
+fun MovieDetail.toEntity(): LibraryMovieEntity = LibraryMovieEntity(
+    id = id ?: -1,
+    imdbId = imdbId,
+    adult = adult,
+    backdropPath = backdropPath,
+    budget = budget,
+    genreIds = genreIds,
+    homepage = homepage,
+    originalLanguage = originalLanguage,
+    originalTitle = originalTitle,
+    overview = overview,
+    popularity = popularity,
+    posterPath = posterPath,
+    productionCountries = productionCountries?.map { it.toEntity() },
+    releaseDate = releaseDate,
+    revenue = revenue,
+    runtime = runtime,
+    spokenLanguages = spokenLanguages?.map { it.toEntity() },
+    status = status,
+    tagLine = tagLine,
+    title = title,
+    video = video,
+    voteAverage = voteAverage,
+    voteCount = voteCount
 )

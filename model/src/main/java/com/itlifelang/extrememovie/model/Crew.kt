@@ -4,7 +4,7 @@
 
 package com.itlifelang.extrememovie.model
 
-data class CrewModel(
+data class Crew(
     val adult: Boolean? = null,
     val gender: Int? = null,
     val id: Int? = null,

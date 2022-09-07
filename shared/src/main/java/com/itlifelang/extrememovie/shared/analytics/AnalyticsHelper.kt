@@ -27,7 +27,6 @@ interface AnalyticsHelper {
     fun setUserSignInProperty(signedIn: Boolean)
 
     companion object {
-
         const val APP_TYPE_PROPERTY = "app_type"
         const val STATUS_INSTANT = "instant"
         const val STATUS_INSTALLED = "installed"

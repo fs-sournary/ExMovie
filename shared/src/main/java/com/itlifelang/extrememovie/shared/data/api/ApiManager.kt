@@ -17,7 +17,6 @@ import retrofit2.converter.gson.GsonConverterFactory
  * It also manages api connection and communication between api and client.
  */
 object ApiManager {
-
     private const val QUERY_PARAMS = "api_key"
     private const val TIMEOUT_DURATION = 10L
 

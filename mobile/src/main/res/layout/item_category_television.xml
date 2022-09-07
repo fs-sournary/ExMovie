@@ -13,7 +13,7 @@
 
         <variable
             name="item"
-            type="com.itlifelang.extrememovie.mobile.data.Television" />
+            type="com.itlifelang.extrememovie.model.Television" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +25,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/poster_image"
-            android:layout_width="240dp"
+            android:layout_width="220dp"
             android:layout_height="140dp"
             app:centerCrop="@{true}"
             app:glideErrorImage="@{@drawable/shape_rectangle_corner_error_image}"

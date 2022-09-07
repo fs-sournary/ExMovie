@@ -4,7 +4,7 @@
 
 package com.itlifelang.extrememovie.model
 
-data class GenreModel(
-    val id: Int? = null,
+data class SpokenLanguage(
+    val iso6391: String? = null,
     val name: String? = null
 )

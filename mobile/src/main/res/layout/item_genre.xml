@@ -6,7 +6,7 @@
 
         <import type="kotlinx.coroutines.flow.StateFlow" />
 
-        <import type="com.itlifelang.extrememovie.mobile.data.Genre" />
+        <import type="com.itlifelang.extrememovie.model.Genre" />
 
         <variable
             name="selectedItem"

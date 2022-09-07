@@ -26,12 +26,11 @@
     <fragment
         android:id="@+id/movie_detail_dest"
         android:name="com.itlifelang.extrememovie.mobile.ui.moviedetail.MovieDetailFragment"
-        tools:layout="@layout/fragment_movie_detail" >
+        tools:layout="@layout/fragment_movie_detail">
 
         <argument
-            android:name="movie"
-            app:argType="com.itlifelang.extrememovie.mobile.data.Movie"
-            app:nullable="false" />
+            android:name="movie_id"
+            app:argType="integer" />
 
         <action
             android:id="@+id/navigate_to_movie_detail"
@@ -53,10 +52,6 @@
         android:name="com.itlifelang.extrememovie.mobile.ui.cast.CastFragment"
         tools:layout="@layout/fragment_cast">
 
-        <argument
-            android:name="cast"
-            app:argType="com.itlifelang.extrememovie.mobile.data.Cast" />
-
         <action
             android:id="@+id/navigate_to_movie_detail"
             app:destination="@id/movie_detail_dest" />
@@ -66,10 +61,6 @@
         android:id="@+id/crew_dest"
         android:name="com.itlifelang.extrememovie.mobile.ui.crew.CrewFragment"
         tools:layout="@layout/fragment_crew">
-
-        <argument
-            android:name="crew"
-            app:argType="com.itlifelang.extrememovie.mobile.data.Crew" />
 
         <action
             android:id="@+id/navigate_to_movie_detail"
@@ -82,8 +73,12 @@
         tools:layout="@layout/fragment_movie_list">
 
         <argument
-            android:name="genre"
-            app:argType="com.itlifelang.extrememovie.mobile.data.Genre" />
+            android:name="name"
+            app:argType="string" />
+
+        <argument
+            android:name="id"
+            app:argType="integer" />
 
         <action
             android:id="@+id/navigate_to_search"

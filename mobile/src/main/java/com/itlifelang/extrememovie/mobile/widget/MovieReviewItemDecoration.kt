@@ -18,7 +18,6 @@ import com.itlifelang.extrememovie.R
 class MovieReviewItemDecoration(
     context: Context
 ) : RecyclerView.ItemDecoration() {
-
     private val left = context.resources.getDimensionPixelSize(R.dimen.dp_16)
     private val divider: Drawable
 
@@ -46,7 +45,6 @@ class MovieReviewItemDecoration(
     }
 
     companion object {
-
         private val ATTRS = intArrayOf(android.R.attr.listDivider)
     }
 }

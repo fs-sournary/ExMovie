@@ -12,7 +12,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CastFragment : BindingFragment<FragmentCastBinding, CastViewModel>() {
-
     override val viewModel: CastViewModel by viewModels()
 
     override val layoutId: Int = R.layout.fragment_cast

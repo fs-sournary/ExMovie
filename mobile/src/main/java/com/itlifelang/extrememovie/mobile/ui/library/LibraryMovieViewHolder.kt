@@ -9,24 +9,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.itlifelang.extrememovie.databinding.ItemLibraryMovieBinding
-import com.itlifelang.extrememovie.mobile.data.Movie
+import com.itlifelang.extrememovie.model.MovieDetail
 
 class LibraryMovieViewHolder(
     private val binding: ItemLibraryMovieBinding,
-    private val click: (View, Movie) -> Unit
+    private val click: (View, MovieDetail) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
-
-    fun bind(movie: Movie) {
-        binding.root.setOnClickListener { click(it, movie) }
+    fun bind(movieDetail: MovieDetail) {
+        binding.root.setOnClickListener { click(it, movieDetail) }
         binding.apply {
-            item = movie
+            item = movieDetail
             executePendingBindings()
         }
     }
 
     companion object {
-
-        fun create(parent: ViewGroup, click: (View, Movie) -> Unit): LibraryMovieViewHolder {
+        fun create(parent: ViewGroup, click: (View, MovieDetail) -> Unit): LibraryMovieViewHolder {
             val inflater = LayoutInflater.from(parent.context)
             val binding = ItemLibraryMovieBinding.inflate(inflater, parent, false)
             return LibraryMovieViewHolder(binding, click)

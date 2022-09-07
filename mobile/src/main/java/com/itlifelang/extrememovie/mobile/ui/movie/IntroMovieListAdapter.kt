@@ -14,15 +14,15 @@ class IntroMovieListAdapter(
     private val firstIntroClick: () -> Unit,
     private val secondIntroClick: () -> Unit
 ) : ListAdapter<Any, ViewHolder>(COMPARATOR) {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        when (viewType) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return when (viewType) {
             R.layout.item_first_intro_movie -> FirstIntroMovieViewHolder.create(
                 parent,
                 firstIntroClick
             )
             else -> SecondIntroMovieViewHolder.create(parent, secondIntroClick)
         }
+    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         when (position) {
@@ -31,13 +31,14 @@ class IntroMovieListAdapter(
         }
     }
 
-    override fun getItemViewType(position: Int): Int = when (position) {
-        0 -> R.layout.item_first_intro_movie
-        else -> R.layout.item_second_intro_movie
+    override fun getItemViewType(position: Int): Int {
+        return when (position) {
+            0 -> R.layout.item_first_intro_movie
+            else -> R.layout.item_second_intro_movie
+        }
     }
 
     companion object {
-
         private val COMPARATOR = object : DiffUtil.ItemCallback<Any>() {
             override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean = false
 

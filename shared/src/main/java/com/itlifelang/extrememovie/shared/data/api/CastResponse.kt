@@ -5,6 +5,7 @@
 package com.itlifelang.extrememovie.shared.data.api
 
 import com.google.gson.annotations.SerializedName
+import com.itlifelang.extrememovie.model.Cast
 
 data class CastResponse(
     @SerializedName("adult")
@@ -32,3 +33,20 @@ data class CastResponse(
     @SerializedName("order")
     val order: Int? = null
 )
+
+fun CastResponse.toModel(): Cast {
+    return Cast(
+        adult = adult,
+        gender = gender,
+        id = id,
+        knownForDepartment = knownForDepartment,
+        name = name,
+        originalName = originalName,
+        popularity = popularity,
+        profilePath = profilePath,
+        castId = castId,
+        character = character,
+        creditId = creditId,
+        order = order
+    )
+}

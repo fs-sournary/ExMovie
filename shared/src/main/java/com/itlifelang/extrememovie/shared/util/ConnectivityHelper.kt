@@ -15,7 +15,6 @@ class ConnectivityHelper(
     private val onNetworkAvailable: ((Network) -> Unit)? = null,
     private val onNetworkLost: ((Network) -> Unit)? = null
 ) {
-
     private val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     private var networkCallback: ConnectivityManager.NetworkCallback? = null

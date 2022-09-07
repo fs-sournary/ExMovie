@@ -9,7 +9,7 @@
 
         <variable
             name="item"
-            type="com.itlifelang.extrememovie.mobile.data.Movie" />
+            type="com.itlifelang.extrememovie.model.Movie" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

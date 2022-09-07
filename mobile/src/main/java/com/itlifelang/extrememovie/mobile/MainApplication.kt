@@ -10,7 +10,7 @@ import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
 @HiltAndroidApp
-class MainApplication() : Application() {
+class MainApplication : Application() {
 
     // Inject a AnalyticsHelper to run its init{} block.
 //    @Inject

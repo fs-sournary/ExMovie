@@ -1,10 +1,6 @@
-/**
- * Copyright 2021 ItLifeLang LLC
- */
-
 package com.itlifelang.extrememovie.model
 
-data class MovieModel(
+class MovieDetail(
     val id: Int? = null,
     val imdbId: String? = null,
     val adult: Boolean? = null,
@@ -17,11 +13,11 @@ data class MovieModel(
     val overview: String? = null,
     val popularity: Double? = null,
     val posterPath: String? = null,
-    val productionCountries: List<ProductionCountryModel>? = null,
+    val productionCountries: List<ProductionCountry>? = null,
     val releaseDate: String? = null,
     val revenue: Int? = null,
     val runtime: Int? = null,
-    val spokenLanguages: List<SpokenLanguageModel>? = null,
+    val spokenLanguages: List<SpokenLanguage>? = null,
     val status: String? = null,
     val tagLine: String? = null,
     val title: String? = null,

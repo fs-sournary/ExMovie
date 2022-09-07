@@ -11,16 +11,15 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.withStyledAttributes
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.itlifelang.extrememovie.R
-import com.itlifelang.extrememovie.mobile.data.Movie
+import com.itlifelang.extrememovie.model.Movie
 import java.text.SimpleDateFormat
-import java.util.Locale
+import java.util.*
 
 /**
  * The [ItemDecoration] draws sticker headers marking days in the given list of [Movie]s. It also
  * provide gaps between days.
  */
 class DateStickerItemDecoration(context: Context, movies: List<Movie>) : ItemDecoration() {
-
     private val dateFormatter = SimpleDateFormat("d", Locale.getDefault())
     private val dayFormatter = SimpleDateFormat("eee", Locale.getDefault())
 

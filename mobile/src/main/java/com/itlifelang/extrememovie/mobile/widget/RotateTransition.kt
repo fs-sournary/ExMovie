@@ -15,7 +15,6 @@ import androidx.transition.TransitionValues
  * The [Transition] animates the rotation of a [View].
  */
 class RotateTransition : Transition() {
-
     override fun getTransitionProperties(): Array<String> = arrayOf(ROTATION_PROPERTY)
 
     override fun captureStartValues(transitionValues: TransitionValues) {
@@ -48,7 +47,6 @@ class RotateTransition : Transition() {
     }
 
     companion object {
-
         private const val ROTATION_PROPERTY = "extrememovie:rotate:rotation"
     }
 }

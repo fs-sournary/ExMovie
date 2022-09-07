@@ -13,8 +13,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/root_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:paddingTopSystemWindowInset="@{true}">
+        android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
@@ -23,16 +22,12 @@
             android:background="?attr/colorSurface"
             app:elevation="0dp">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_scrollFlags="scroll|snap|enterAlways"
-                app:visibleWhen="@{viewModel.hasConnection}" />
-
             <com.google.android.material.appbar.MaterialToolbar
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|snap|enterAlways"
                 app:marginRightSystemWindowInset="@{true}"
+                app:marginTopSystemWindowInset="@{true}"
                 app:menu="@menu/menu_movie_toolbar"
                 app:title="@string/television_title" />
         </com.google.android.material.appbar.AppBarLayout>
@@ -101,7 +96,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/genre_title_text"
-                    tools:listitem="@layout/item_category_television" />
+                    tools:listitem="@layout/item_genre_television" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/airing_today_title"

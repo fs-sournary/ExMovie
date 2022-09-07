@@ -11,7 +11,6 @@ import javax.inject.Inject
 class SetLaunchedWalkThroughUseCase @Inject constructor(
     private val appPreference: AppPreference
 ) : CoroutineUseCase<Boolean, Unit>() {
-
     override suspend fun execute(params: Boolean) {
         appPreference.saveLaunchWalkThrough(params)
     }

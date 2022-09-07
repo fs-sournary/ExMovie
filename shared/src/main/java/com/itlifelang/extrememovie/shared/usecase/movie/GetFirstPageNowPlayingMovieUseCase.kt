@@ -4,26 +4,27 @@
 
 package com.itlifelang.extrememovie.shared.usecase.movie
 
-import com.itlifelang.extrememovie.model.MovieModel
+import com.itlifelang.extrememovie.model.Movie
 import com.itlifelang.extrememovie.shared.data.api.MovieApi
-import com.itlifelang.extrememovie.shared.mapper.mapToModel
+import com.itlifelang.extrememovie.shared.data.api.toModel
 import com.itlifelang.extrememovie.shared.result.Result
 import com.itlifelang.extrememovie.shared.usecase.FlowUseCase
-import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class GetFirstPageNowPlayingMovieUseCase @Inject constructor(private val movieApi: MovieApi) :
-    FlowUseCase<Unit, List<MovieModel>>() {
-
-    override fun execute(params: Unit): Flow<Result<List<MovieModel>>> = flow {
-        val responseMovies = movieApi.getNowPlayingMovies(DEF_FIRST_PAGE).results ?: emptyList()
-        val movies = responseMovies.map { it.mapToModel() }
-        emit(Result.Success(movies))
+class GetFirstPageNowPlayingMovieUseCase @Inject constructor(
+    private val movieApi: MovieApi
+) : FlowUseCase<Unit, List<Movie>>() {
+    override fun execute(params: Unit): Flow<Result<List<Movie>>> {
+        return flow {
+            val responseMovies = movieApi.getNowPlayingMovies(DEF_FIRST_PAGE).results ?: emptyList()
+            val movies = responseMovies.map { it.toModel() }
+            emit(Result.Success(movies))
+        }
     }
 
     companion object {
-
         private const val DEF_FIRST_PAGE = 1
     }
 }

@@ -9,13 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.itlifelang.extrememovie.databinding.ItemCrewBinding
-import com.itlifelang.extrememovie.mobile.data.Crew
+import com.itlifelang.extrememovie.model.Crew
 
 class CrewViewHolder(
     private val binding: ItemCrewBinding,
     private val click: (View, Crew) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
-
     fun bindData(crew: Crew) {
         binding.root.setOnClickListener { click(it, crew) }
         binding.apply {
@@ -25,7 +24,6 @@ class CrewViewHolder(
     }
 
     companion object {
-
         fun create(parent: ViewGroup, click: (View, Crew) -> Unit): CrewViewHolder {
             val inflater = LayoutInflater.from(parent.context)
             val binding = ItemCrewBinding.inflate(inflater, parent, false)

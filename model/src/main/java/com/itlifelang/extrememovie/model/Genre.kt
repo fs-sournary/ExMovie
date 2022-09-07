@@ -4,7 +4,7 @@
 
 package com.itlifelang.extrememovie.model
 
-data class ProductionCountryModel(
-    val iso31661: String? = null,
+data class Genre(
+    val id: Int? = null,
     val name: String? = null
 )

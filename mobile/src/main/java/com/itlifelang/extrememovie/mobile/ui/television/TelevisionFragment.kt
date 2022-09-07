@@ -21,7 +21,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TelevisionFragment : BindingFragment<FragmentTelevisionBinding, TelevisionViewModel>() {
-
     private var airingTodayTelevisionListAdapter: CategoryTelevisionListAdapter by autoClear()
     private var onTheAirTelevisionListAdapter: CategoryTelevisionListAdapter by autoClear()
     private var popularTelevisionListAdapter: CategoryTelevisionListAdapter by autoClear()

@@ -5,6 +5,7 @@
 package com.itlifelang.extrememovie.shared.data.api
 
 import com.google.gson.annotations.SerializedName
+import com.itlifelang.extrememovie.model.Author
 
 data class AuthorResponse(
     @SerializedName("author")
@@ -22,3 +23,15 @@ data class AuthorResponse(
     @SerializedName("url")
     val url: String? = null
 )
+
+fun AuthorResponse.toModel(): Author {
+    return Author(
+        author = author,
+        authorDetails = authorDetails?.toModel(),
+        content = content,
+        createdAt = createdAt,
+        id = id,
+        updatedAt = updatedAt,
+        url = url
+    )
+}

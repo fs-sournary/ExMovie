@@ -7,7 +7,6 @@ package com.itlifelang.extrememovie.shared.data.preference
 import kotlinx.coroutines.flow.Flow
 
 interface AppPreference {
-
     suspend fun saveAccessToken(accessToken: String)
     val accessToken: Flow<String>
 

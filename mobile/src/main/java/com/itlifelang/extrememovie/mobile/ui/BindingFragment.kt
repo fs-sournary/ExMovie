@@ -24,7 +24,6 @@ import com.itlifelang.extrememovie.shared.extension.autoClear
  * @param VM: the type of [ViewModel] that is internally used for [BindingFragment]
  */
 abstract class BindingFragment<B : ViewDataBinding, VM : ViewModel> : Fragment() {
-
     protected abstract val viewModel: VM
 
     protected val navController by lazy { findNavController() }

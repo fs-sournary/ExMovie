@@ -5,6 +5,7 @@
 package com.itlifelang.extrememovie.shared.data.api
 
 import com.google.gson.annotations.SerializedName
+import com.itlifelang.extrememovie.model.Video
 
 data class VideoResponse(
     @SerializedName("id")
@@ -20,3 +21,5 @@ data class VideoResponse(
     @SerializedName("type")
     val type: String? = null
 )
+
+fun VideoResponse.toModel(): Video = Video(id, key, site, name, size, type)

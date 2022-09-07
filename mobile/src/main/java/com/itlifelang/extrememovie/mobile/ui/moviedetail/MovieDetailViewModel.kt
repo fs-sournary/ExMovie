@@ -9,11 +9,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import androidx.paging.map
-import com.itlifelang.extrememovie.mobile.data.*
-import com.itlifelang.extrememovie.mobile.mapper.mapToMobile
-import com.itlifelang.extrememovie.mobile.mapper.mapToModel
-import com.itlifelang.extrememovie.model.CreditModel
+import com.itlifelang.extrememovie.model.Cast
+import com.itlifelang.extrememovie.model.Credit
+import com.itlifelang.extrememovie.model.Crew
+import com.itlifelang.extrememovie.model.Genre
+import com.itlifelang.extrememovie.model.Movie
+import com.itlifelang.extrememovie.model.MovieDetail
+import com.itlifelang.extrememovie.model.Video
 import com.itlifelang.extrememovie.shared.result.Result
 import com.itlifelang.extrememovie.shared.result.data
 import com.itlifelang.extrememovie.shared.result.successOr
@@ -22,17 +24,24 @@ import com.itlifelang.extrememovie.shared.usecase.library.GetLibraryMovieUseCase
 import com.itlifelang.extrememovie.shared.usecase.library.SaveLibraryMovieUseCase
 import com.itlifelang.extrememovie.shared.usecase.movie.GetGenreListUseCase
 import com.itlifelang.extrememovie.shared.usecase.movie.GetMovieCreditListUseCase
+import com.itlifelang.extrememovie.shared.usecase.movie.GetMovieDetailUseCase
 import com.itlifelang.extrememovie.shared.usecase.movie.GetMovieVideoUseCase
 import com.itlifelang.extrememovie.shared.usecase.movie.GetSimilarMoviePagingUseCase
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted.Companion.Lazily
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class MovieDetailViewModel @AssistedInject constructor(
-    @Assisted val movie: Movie,
+    @Assisted val movieId: Int,
+    getMovieDetailUseCase: GetMovieDetailUseCase,
     getGenreListUseCase: GetGenreListUseCase,
     getSimilarMoviePagingUseCase: GetSimilarMoviePagingUseCase,
     getMovieCreditListUseCase: GetMovieCreditListUseCase,
@@ -41,43 +50,40 @@ class MovieDetailViewModel @AssistedInject constructor(
     private val saveLibraryMovieUseCase: SaveLibraryMovieUseCase,
     private val deleteLibraryMovieUseCase: DeleteLibraryMovieUseCase
 ) : ViewModel() {
+    private val movieDetailResult: StateFlow<Result<MovieDetail>> =
+        getMovieDetailUseCase(movieId).stateIn(viewModelScope, Lazily, Result.Loading)
 
-    private val movieId = movie.id ?: 0
-    val popularityText = "${movie.popularity} popularity"
+    val movieDetail: StateFlow<MovieDetail?> = movieDetailResult.map {
+        it.data
+    }.stateIn(viewModelScope, Lazily, null)
 
     // Movies that are similar to the movie.
     val similarMovies: Flow<PagingData<Movie>> = getSimilarMoviePagingUseCase(movieId)
-        .map { moviePagingData ->
-            moviePagingData.map { movie -> movie.mapToMobile() }
-        }
         .cachedIn(viewModelScope)
 
     // Credits that contains all casts and crews belong to the movie.
-    private val creditResult: StateFlow<Result<CreditModel>> = getMovieCreditListUseCase(
-        movieId
-    ).stateIn(viewModelScope, Lazily, Result.Loading)
+    private val creditResult: StateFlow<Result<Credit>> =
+        getMovieCreditListUseCase(movieId).stateIn(viewModelScope, Lazily, Result.Loading)
 
     val cast: StateFlow<List<Cast>?> = creditResult.map {
-        it.data?.mapToMobile()?.cast
+        it.data?.cast
     }.stateIn(viewModelScope, Lazily, null)
 
     val crew: StateFlow<List<Crew>?> = creditResult.map {
-        it.data?.mapToMobile()?.crew
+        it.data?.crew
     }.stateIn(viewModelScope, Lazily, null)
 
     // All genres
-    private val genres: StateFlow<List<Genre>> = getGenreListUseCase(Unit)
-        .map {
-            it.successOr { listOf() }.map { genre -> genre.mapToMobile() }
-        }
-        .stateIn(viewModelScope, Lazily, listOf())
+    private val genres: StateFlow<List<Genre>> = getGenreListUseCase(Unit).map {
+        it.successOr { listOf() }
+    }.stateIn(viewModelScope, Lazily, listOf())
 
     // Genres that the movie belongs to
-    val movieGenres: StateFlow<List<Genre>?> = genres.map { genreList ->
-        val movieGenreIds = movie.genreIds ?: return@map null
+    val movieGenres: StateFlow<List<Genre>?> = combine(movieDetail, genres) { movieDetail, genres ->
+        val movieGenreIds = movieDetail?.genreIds ?: return@combine null
         val result = mutableListOf<Genre>()
         movieGenreIds.forEach { id ->
-            val genre = genreList.firstOrNull { genre -> id == genre.id }
+            val genre = genres.firstOrNull { genre -> id == genre.id }
             genre?.let { result.add(it) }
         }
         result
@@ -85,9 +91,8 @@ class MovieDetailViewModel @AssistedInject constructor(
 
     // Videos that the movie belongs to
     val videos: StateFlow<List<Video>?> = getMovieVideoUseCase(movieId)
-        .map {
-            it.data?.map { video -> video.mapToMobile() }
-        }.stateIn(viewModelScope, Lazily, null)
+        .map { it.data }
+        .stateIn(viewModelScope, Lazily, null)
 
     private val _videoType = MutableStateFlow("")
     val videoType: StateFlow<String> = _videoType
@@ -101,13 +106,12 @@ class MovieDetailViewModel @AssistedInject constructor(
     val isMovieInLibrary: StateFlow<Boolean> = _isMovieInLibrary
 
     init {
-        checkLibraryMovie(movie)
+        checkLibraryMovie()
     }
 
-    private fun checkLibraryMovie(movie: Movie) {
-        val currentMovieId = movie.id ?: return
+    private fun checkLibraryMovie() {
         viewModelScope.launch {
-            _isMovieInLibrary.value = getLibraryMovieUseCase(currentMovieId) is Result.Success
+            _isMovieInLibrary.value = getLibraryMovieUseCase(movieId) is Result.Success
         }
     }
 
@@ -130,14 +134,16 @@ class MovieDetailViewModel @AssistedInject constructor(
     }
 
     private suspend fun saveLibraryMovie() {
-        val result = saveLibraryMovieUseCase(movie.mapToModel())
+        val currentMovieDetail = movieDetail.value ?: return
+        val result = saveLibraryMovieUseCase(currentMovieDetail)
         if (result is Result.Success) {
             _isMovieInLibrary.value = true
         }
     }
 
     private suspend fun deleteLibraryMovie() {
-        val result = deleteLibraryMovieUseCase(movie.mapToModel())
+        val currentMovieDetail = movieDetail.value ?: return
+        val result = deleteLibraryMovieUseCase(currentMovieDetail)
         if (result is Result.Success) {
             _isMovieInLibrary.value = false
         }
@@ -145,16 +151,16 @@ class MovieDetailViewModel @AssistedInject constructor(
 
     @AssistedFactory
     interface Factory {
-
-        fun create(movie: Movie): MovieDetailViewModel
+        fun create(movieId: Int): MovieDetailViewModel
     }
 
     companion object {
-
-        fun provideFactory(factory: Factory, movie: Movie) = object : ViewModelProvider.Factory {
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return factory.create(movie) as T
+        fun provideFactory(factory: Factory, movieId: Int): ViewModelProvider.Factory {
+            return object : ViewModelProvider.Factory {
+                @Suppress("UNCHECKED_CAST")
+                override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                    return factory.create(movieId) as T
+                }
             }
         }
     }

@@ -9,13 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.itlifelang.extrememovie.databinding.ItemSimilarMovieBinding
-import com.itlifelang.extrememovie.mobile.data.Movie
+import com.itlifelang.extrememovie.model.Movie
 
 class SimilarMovieViewHolder(
     private val binding: ItemSimilarMovieBinding,
     private val click: (View, Movie) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
-
     fun bindData(movie: Movie) {
         binding.root.setOnClickListener { click(binding.root, movie) }
         binding.apply {
@@ -25,7 +24,6 @@ class SimilarMovieViewHolder(
     }
 
     companion object {
-
         fun create(
             parent: ViewGroup,
             click: (View, Movie) -> Unit

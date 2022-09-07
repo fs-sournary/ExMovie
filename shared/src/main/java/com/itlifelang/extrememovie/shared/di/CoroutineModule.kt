@@ -16,7 +16,6 @@ import kotlinx.coroutines.SupervisorJob
 @InstallIn(SingletonComponent::class)
 @Module
 object CoroutineModule {
-
     @DefaultDispatcher
     @Provides
     fun provideDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default

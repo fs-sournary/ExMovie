@@ -13,13 +13,11 @@ class FirstIntroMovieViewHolder(
     private val binding: ItemFirstIntroMovieBinding,
     private val click: () -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
-
     fun bindData() {
         binding.root.setOnClickListener { click() }
     }
 
     companion object {
-
         fun create(parent: ViewGroup, click: () -> Unit): FirstIntroMovieViewHolder {
             val inflater = LayoutInflater.from(parent.context)
             val binding = ItemFirstIntroMovieBinding.inflate(inflater, parent, false)

@@ -9,14 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.itlifelang.extrememovie.databinding.ItemCategoryMovieBinding
-import com.itlifelang.extrememovie.mobile.data.Movie
+import com.itlifelang.extrememovie.model.Movie
 
 class CategoryMovieViewHolder(
     private val binding: ItemCategoryMovieBinding,
     private val prefixTransitionName: String,
     private val click: (View, Movie) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
-
     fun bindData(movie: Movie) {
         binding.root.setOnClickListener { click(binding.root, movie) }
         binding.apply {
@@ -27,7 +26,6 @@ class CategoryMovieViewHolder(
     }
 
     companion object {
-
         fun create(
             parent: ViewGroup,
             prefixTransitionName: String,

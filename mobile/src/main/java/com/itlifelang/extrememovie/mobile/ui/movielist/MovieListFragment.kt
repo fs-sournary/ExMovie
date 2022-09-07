@@ -18,7 +18,6 @@ import com.google.android.material.transition.MaterialElevationScale
 import com.google.android.material.transition.MaterialSharedAxis
 import com.itlifelang.extrememovie.R
 import com.itlifelang.extrememovie.databinding.FragmentMovieListBinding
-import com.itlifelang.extrememovie.mobile.data.Genre
 import com.itlifelang.extrememovie.mobile.ui.BindingFragment
 import com.itlifelang.extrememovie.shared.extension.autoClear
 import com.itlifelang.extrememovie.shared.extension.flowWithViewLifecycle
@@ -26,16 +25,20 @@ import com.itlifelang.extrememovie.shared.extension.startPostponedTransitionOnPr
 import com.itlifelang.extrememovie.shared.extension.themeColor
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MovieListFragment : BindingFragment<FragmentMovieListBinding, MovieListViewModel>() {
-
     private val safeArgs: MovieListFragmentArgs by navArgs()
-    private val genreArgs: Genre by lazy { safeArgs.genre }
 
     private var movieListPagingDataAdapter: MovieListPagingDataAdapter by autoClear()
 
-    override val viewModel: MovieListViewModel by viewModels()
+    @Inject
+    lateinit var viewModelFactory: MovieListViewModel.Factory
+
+    override val viewModel: MovieListViewModel by viewModels {
+        MovieListViewModel.provideFactory(viewModelFactory, safeArgs.name, safeArgs.id)
+    }
 
     override val layoutId: Int = R.layout.fragment_movie_list
 
@@ -54,7 +57,6 @@ class MovieListFragment : BindingFragment<FragmentMovieListBinding, MovieListVie
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         startPostponedTransitionOnPreDraw(view)
-        viewModel.setGenre(genreArgs)
         setupMovieList()
         setupEvents()
     }
@@ -65,7 +67,7 @@ class MovieListFragment : BindingFragment<FragmentMovieListBinding, MovieListVie
             reenterTransition = MaterialElevationScale(true).apply { duration = 300.toLong() }
             val movieDetailTransitionName = getString(R.string.movie_detail_transition_name)
             val extras = FragmentNavigatorExtras(view to movieDetailTransitionName)
-            val directions = MovieListFragmentDirections.navigateToMovieDetail(movie)
+            val directions = MovieListFragmentDirections.navigateToMovieDetail(movie.id ?: 0)
             navController.navigate(directions, extras)
         }
         binding.movieList.adapter = movieListPagingDataAdapter
@@ -77,9 +79,7 @@ class MovieListFragment : BindingFragment<FragmentMovieListBinding, MovieListVie
             }
         }
         flowWithViewLifecycle(viewModel.movies) {
-            flowWithViewLifecycle(it ?: return@flowWithViewLifecycle) { pagingData ->
-                movieListPagingDataAdapter.submitData(pagingData)
-            }
+            movieListPagingDataAdapter.submitData(it)
         }
     }
 

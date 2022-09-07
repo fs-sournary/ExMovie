@@ -13,14 +13,13 @@ import android.view.LayoutInflater
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.itlifelang.extrememovie.R
-import com.itlifelang.extrememovie.mobile.data.Genre
+import com.itlifelang.extrememovie.model.Genre
 
 class GenreChipGroup @JvmOverloads constructor(
     context: Context,
     attr: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : ChipGroup(context, attr, defStyleAttr) {
-
     private var checkId: Int = -1
 
     fun setGenres(inflater: LayoutInflater, items: List<Genre>?, click: (Genre) -> Unit) {
@@ -58,7 +57,6 @@ class GenreChipGroup @JvmOverloads constructor(
     }
 
     internal class SavedState : BaseSavedState {
-
         var checkId: Int = -1
 
         constructor(source: Parcel) : super(source) {
@@ -73,7 +71,6 @@ class GenreChipGroup @JvmOverloads constructor(
         }
 
         companion object {
-
             @JvmField
             val CREATOR = object : Parcelable.Creator<SavedState> {
                 override fun createFromParcel(source: Parcel): SavedState = SavedState(source)

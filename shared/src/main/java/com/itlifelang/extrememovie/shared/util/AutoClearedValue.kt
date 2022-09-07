@@ -19,7 +19,6 @@ class AutoClearedValue<T>(
     fragment: Fragment,
     private val destroyViewAction: (() -> Unit)? = null
 ) : ReadWriteProperty<Fragment, T> {
-
     private var _value: T? = null
 
     init {

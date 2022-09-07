@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.itlifelang.extrememovie.databinding.ItemReviewBinding
-import com.itlifelang.extrememovie.mobile.data.Author
+import com.itlifelang.extrememovie.model.Author
 
 class ReviewViewHolder(
     private val binding: ItemReviewBinding

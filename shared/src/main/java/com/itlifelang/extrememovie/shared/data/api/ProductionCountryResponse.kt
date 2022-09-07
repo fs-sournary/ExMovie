@@ -5,6 +5,7 @@
 package com.itlifelang.extrememovie.shared.data.api
 
 import com.google.gson.annotations.SerializedName
+import com.itlifelang.extrememovie.model.ProductionCountry
 
 data class ProductionCountryResponse(
     @SerializedName("iso_3166_1")
@@ -12,3 +13,5 @@ data class ProductionCountryResponse(
     @SerializedName("name")
     val name: String? = null
 )
+
+fun ProductionCountryResponse.toModel() = ProductionCountry(iso31661, name)

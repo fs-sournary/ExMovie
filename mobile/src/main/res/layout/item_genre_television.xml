@@ -9,7 +9,7 @@
 
         <variable
             name="item"
-            type="com.itlifelang.extrememovie.mobile.data.Television" />
+            type="com.itlifelang.extrememovie.model.Television" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -17,11 +17,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:cardCornerRadius="6dp"
-        app:cardElevation="4dp">
+        app:cardElevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="140dp"
-            android:layout_height="210dp">
+            android:layout_height="180dp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/logo_image"

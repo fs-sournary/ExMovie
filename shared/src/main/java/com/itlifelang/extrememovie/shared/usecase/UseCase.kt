@@ -13,7 +13,6 @@ import com.itlifelang.extrememovie.shared.result.Result
  * @param T: the type of parameter.
  */
 abstract class UseCase<P, T> {
-
     operator fun invoke(params: P): Result<T> = try {
         val data = execute(params)
         Result.Success(data)

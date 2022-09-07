@@ -1,8 +1,7 @@
 package com.itlifelang.extrememovie.shared.extension
 
 import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import java.util.*
 
 /**
  * Get the search past time that is represent by [String].

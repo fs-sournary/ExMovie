@@ -5,6 +5,7 @@
 package com.itlifelang.extrememovie.shared.data.api
 
 import com.google.gson.annotations.SerializedName
+import com.itlifelang.extrememovie.model.Television
 
 data class TelevisionResponse(
     @SerializedName("id")
@@ -34,3 +35,21 @@ data class TelevisionResponse(
     @SerializedName("original_name")
     val originalName: String? = null
 )
+
+fun TelevisionResponse.toModel(): Television {
+    return Television(
+        id = id,
+        posterPath = posterPath,
+        popularity = popularity,
+        backdropPath = backdropPath,
+        voteAverage = voteAverage,
+        overview = overview,
+        firstAirDate = firstAirDate,
+        originCountries = originCountries,
+        genreIds = genreIds,
+        originalLanguage = originalLanguage,
+        voteCount = voteCount,
+        name = name,
+        originalName = originalName
+    )
+}

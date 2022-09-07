@@ -5,6 +5,7 @@
 package com.itlifelang.extrememovie.shared.data.api
 
 import com.google.gson.annotations.SerializedName
+import com.itlifelang.extrememovie.model.Crew
 
 data class CrewResponse(
     @SerializedName("adult")
@@ -30,3 +31,19 @@ data class CrewResponse(
     @SerializedName("job")
     val job: String? = null
 )
+
+fun CrewResponse.toModel(): Crew {
+    return Crew(
+        adult = adult,
+        gender = gender,
+        id = id,
+        knownForDepartment = knownForDepartment,
+        name = name,
+        originalName = originalName,
+        popularity = popularity,
+        profilePath = profilePath,
+        creditId = creditId,
+        department = department,
+        job = job
+    )
+}

@@ -4,7 +4,7 @@
 
 package com.itlifelang.extrememovie.model
 
-data class SpokenLanguageModel(
-    val iso6391: String? = null,
+data class ProductionCountry(
+    val iso31661: String? = null,
     val name: String? = null
 )

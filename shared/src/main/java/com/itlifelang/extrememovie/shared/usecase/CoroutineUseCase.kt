@@ -13,7 +13,6 @@ import com.itlifelang.extrememovie.shared.result.Result
  * @param T: the type of return type.
  */
 abstract class CoroutineUseCase<P, T> {
-
     suspend operator fun invoke(params: P): Result<T> = try {
         val data = execute(params)
         Result.Success(data)

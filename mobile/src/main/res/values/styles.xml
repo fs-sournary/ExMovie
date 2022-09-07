@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Widget.ExtremeMovie.Button.WalkThrough.Normal" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <style name="Widget.ExtremeMovie.Button.WalkThrough.Normal" parent="Widget.Material3.Button.OutlinedButton">
         <item name="android:paddingStart">56dp</item>
         <item name="android:paddingEnd">56dp</item>
         <item name="android:paddingTop">12dp</item>
@@ -16,7 +16,7 @@
         <item name="strokeColor">@android:color/white</item>
     </style>
 
-    <style name="Widget.ExtremeMovie.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+    <style name="Widget.ExtremeMovie.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
         <item name="insetForeground">@android:color/transparent</item>
         <item name="background">@android:color/transparent</item>
     </style>
@@ -34,19 +34,21 @@
         <item name="dayTextSize">12sp</item>
     </style>
 
-    <style name="Widget.ExtremeMovie.BottomSheet.Modal" parent="Widget.MaterialComponents.BottomSheet.Modal">
+    <style name="Widget.ExtremeMovie.BottomSheet.Modal" parent="Widget.Material3.BottomSheet.Modal">
         <item name="shapeAppearance">
-            @style/ShapeAppearance.ExtremeMovie.LargeComponent.BottomSheet.Model
+            @style/ShapeAppearance.AppTheme.LargeComponent.BottomSheet.Model
         </item>
     </style>
 
-    <style name="Widget.ExtremeMovie.Button.MovieDetail" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <style name="Widget.ExtremeMovie.Button.MovieDetail" parent="Widget.Material3.Button.OutlinedButton.Icon">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
-        <item name="minWidth">48dp</item>
-        <item name="iconGravity">textStart</item>
         <item name="iconPadding">0dp</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="iconGravity">textStart</item>
         <item name="iconTint">?attr/colorControlNormal</item>
         <item name="rippleColor">?attr/colorControlHighlight</item>
     </style>

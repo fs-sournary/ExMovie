@@ -4,9 +4,9 @@
 
 package com.itlifelang.extrememovie.shared.usecase.search
 
-import com.itlifelang.extrememovie.model.MovieModel
+import com.itlifelang.extrememovie.model.Movie
 import com.itlifelang.extrememovie.shared.data.db.SearchMovieDao
-import com.itlifelang.extrememovie.shared.mapper.mapToEntity
+import com.itlifelang.extrememovie.shared.data.db.toEntity
 import com.itlifelang.extrememovie.shared.usecase.CoroutineUseCase
 import javax.inject.Inject
 
@@ -16,13 +16,13 @@ import javax.inject.Inject
  */
 class SaveHistorySearchMovieUseCase @Inject constructor(
     private val searchMovieDao: SearchMovieDao
-) : CoroutineUseCase<Pair<MovieModel, Long>, Unit>() {
+) : CoroutineUseCase<Pair<Movie, Long>, Unit>() {
 
     /**
      * @param params A pair of a movie and its saved time
      */
-    override suspend fun execute(params: Pair<MovieModel, Long>) {
-        val movieEntity = params.first.mapToEntity(params.second)
+    override suspend fun execute(params: Pair<Movie, Long>) {
+        val movieEntity = params.first.toEntity(params.second)
         searchMovieDao.insert(movieEntity)
     }
 }

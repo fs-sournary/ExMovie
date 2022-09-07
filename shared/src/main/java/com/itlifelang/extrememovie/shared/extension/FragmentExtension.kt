@@ -17,8 +17,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-fun <T> Fragment.autoClear(destroyViewAction: (() -> Unit)? = null): AutoClearedValue<T> =
-    AutoClearedValue(this, destroyViewAction)
+fun <T> Fragment.autoClear(destroyViewAction: (() -> Unit)? = null): AutoClearedValue<T> {
+    return AutoClearedValue(this, destroyViewAction)
+}
 
 fun Fragment.startPostponedTransitionOnPreDraw(view: View) {
     postponeEnterTransition()

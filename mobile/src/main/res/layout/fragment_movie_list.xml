@@ -35,7 +35,7 @@
                 app:marginTopSystemWindowInset="@{true}"
                 app:menu="@menu/menu_movie_toolbar"
                 app:navigationIcon="@drawable/ic_arrow_back"
-                app:title="@{viewModel.genre.name}" />
+                app:title="@{viewModel.genreName}" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <FrameLayout

@@ -18,8 +18,8 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
 import com.itlifelang.extrememovie.R
 import com.itlifelang.extrememovie.databinding.FragmentMovieSearchBinding
-import com.itlifelang.extrememovie.mobile.data.Movie
 import com.itlifelang.extrememovie.mobile.ui.BindingFragment
+import com.itlifelang.extrememovie.model.Movie
 import com.itlifelang.extrememovie.shared.extension.autoClear
 import com.itlifelang.extrememovie.shared.extension.dismissKeyBoard
 import com.itlifelang.extrememovie.shared.extension.flowWithViewLifecycle
@@ -29,7 +29,6 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.map
-import timber.log.Timber
 
 @AndroidEntryPoint
 class MovieSearchFragment : BindingFragment<FragmentMovieSearchBinding, MovieSearchViewModel>() {
@@ -155,7 +154,7 @@ class MovieSearchFragment : BindingFragment<FragmentMovieSearchBinding, MovieSea
             navigateToMovieDetail(view, movie)
         }
         binding.historySearchMovieList.adapter = historySearchMoviePagingDataAdapter
-        flowWithViewLifecycle(viewModel.historySearchMovie) {
+        flowWithViewLifecycle(viewModel.historyUi) {
             historySearchMoviePagingDataAdapter.submitData(it)
         }
         flowWithViewLifecycle(historySearchMoviePagingDataAdapter.loadStateFlow) {
@@ -167,7 +166,7 @@ class MovieSearchFragment : BindingFragment<FragmentMovieSearchBinding, MovieSea
     private fun navigateToMovieDetail(view: View, movie: Movie) {
         val movieDetailTransitionName = getString(R.string.movie_detail_transition_name)
         val extras = FragmentNavigatorExtras(view to movieDetailTransitionName)
-        val directions = MovieSearchFragmentDirections.navigateToMovieDetail(movie)
+        val directions = MovieSearchFragmentDirections.navigateToMovieDetail(movie.id ?: 0)
         navController.navigate(directions, extras)
     }
 

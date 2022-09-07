@@ -11,7 +11,6 @@ class SearchMovieLoadStateViewHolder(
     private val binding: ItemMovieSearchLoadStateBinding,
     private val retry: () -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
-
     init {
         binding.retryButton.setOnClickListener { retry() }
     }
@@ -26,7 +25,6 @@ class SearchMovieLoadStateViewHolder(
     }
 
     companion object {
-
         fun create(parent: ViewGroup, retry: () -> Unit): SearchMovieLoadStateViewHolder {
             val inflater = LayoutInflater.from(parent.context)
             val binding = ItemMovieSearchLoadStateBinding.inflate(inflater, parent, false)

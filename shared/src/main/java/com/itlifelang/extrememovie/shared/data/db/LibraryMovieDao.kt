@@ -10,7 +10,6 @@ import androidx.room.Query
 
 @Dao
 interface LibraryMovieDao : BaseDao<LibraryMovieEntity> {
-
     @Query("SELECT * FROM library_movie")
     fun getLibraryMovies(): PagingSource<Int, LibraryMovieEntity>
 
